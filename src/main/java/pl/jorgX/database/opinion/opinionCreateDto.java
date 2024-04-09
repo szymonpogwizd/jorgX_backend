@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-public class opinionCreateDto {
+public class OpinionCreateDto {
 
     @NotBlank
     @Size(min = 1, max = 100)

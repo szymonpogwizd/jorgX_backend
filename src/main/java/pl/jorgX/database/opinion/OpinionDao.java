@@ -6,8 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import org.springframework.data.domain.Auditable;
-import pl.jorgX.database.place.placeDao;
+import pl.jorgX.database.place.PlaceDao;
 
 
 import java.util.UUID;
@@ -17,7 +16,7 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = false)
 @Data
 @Table(name = "opinion")
-public class opinionDao{
+public class OpinionDao {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -32,12 +31,12 @@ public class opinionDao{
 
     @ManyToOne
     @JoinColumn( name = "place_id")
-    private placeDao place;
+    private PlaceDao place;
 
-    public opinionDao() {
+    public OpinionDao() {
 
     }
-    public opinionDao(UUID id, String opinion, String nick, placeDao place){
+    public OpinionDao(UUID id, String opinion, String nick, PlaceDao place){
         this.id = id;
         this.opinion = opinion;
         this.nick = nick;

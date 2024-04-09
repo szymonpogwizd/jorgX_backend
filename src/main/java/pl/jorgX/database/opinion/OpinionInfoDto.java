@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-public class opinionInfoDto {
+public class OpinionInfoDto {
 
     private UUID id;
 

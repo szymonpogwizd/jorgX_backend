@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface opinionRepository extends JpaRepository<opinionDao, UUID> {
+public interface OpinionRepository extends JpaRepository<OpinionDao, UUID> {
 
 
 }

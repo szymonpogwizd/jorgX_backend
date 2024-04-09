@@ -1,12 +1,17 @@
-package pl.jorgX.database.city;
+package pl.jorgX.database.place;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
-public class cityCreateDto {
+public class PlaceCreateDto {
     @NotBlank
     @Size(min = 1, max = 100)
-    private String city;
+    private String name;
+    private UUID city_id;
+
+
 }

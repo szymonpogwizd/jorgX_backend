@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface cityRepository extends JpaRepository<CityDao, UUID> {
+public interface CityRepository extends JpaRepository<CityDao, UUID> {
 
 
 }

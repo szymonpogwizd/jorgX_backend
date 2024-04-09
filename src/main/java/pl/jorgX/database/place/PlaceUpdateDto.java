@@ -1,5 +1,4 @@
-package pl.jorgX.database.opinion;
-
+package pl.jorgX.database.place;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -8,14 +7,11 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-public class opinionUpdateDto {
+public class PlaceUpdateDto {
 
     @NotBlank
     @Size(min = 1, max = 100)
-
-    private String opinion;
-
-    private String nick;
-    private UUID place_id;
+    private String name;
+    private UUID city_id;
 
 }

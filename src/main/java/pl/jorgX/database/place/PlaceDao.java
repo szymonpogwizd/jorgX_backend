@@ -14,7 +14,7 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = false)
 @Data
 @Table(name = "place")
-public class placeDao {
+public class PlaceDao {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -28,11 +28,11 @@ public class placeDao {
     private CityDao city;
 
 
-    public placeDao() {
+    public PlaceDao() {
 
     }
 
-    public placeDao(UUID id, String name, CityDao city)
+    public PlaceDao(UUID id, String name, CityDao city)
     {
         this.id = id;
         this.name = name;

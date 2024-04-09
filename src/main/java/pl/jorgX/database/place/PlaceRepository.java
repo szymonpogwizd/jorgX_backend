@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface placeRepository extends JpaRepository<placeDao, UUID> {
+public interface PlaceRepository extends JpaRepository<PlaceDao, UUID> {
 
 }
