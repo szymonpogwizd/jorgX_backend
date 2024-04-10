@@ -11,5 +11,5 @@ public class PlaceCreateDTO {
     @NotBlank
     @Size(min = 1, max = 100)
     private String name;
-    private UUID city_id;
+    private UUID cityId;
 }

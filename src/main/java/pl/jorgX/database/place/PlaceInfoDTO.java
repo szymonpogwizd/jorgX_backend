@@ -10,5 +10,5 @@ public class PlaceInfoDTO {
 
     private UUID id;
     private String name;
-    private UUID city_id;
+    private UUID cityId;
 }

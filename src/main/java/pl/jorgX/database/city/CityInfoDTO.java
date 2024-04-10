@@ -8,6 +8,6 @@ import java.util.UUID;
 public class CityInfoDTO {
 
     private UUID id;
-    private String city;
+    private String name;
 
 }

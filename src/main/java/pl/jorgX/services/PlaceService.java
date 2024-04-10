@@ -19,7 +19,7 @@ public class PlaceService {
     private final PlaceRepository placeRepository;
 
     @Transactional
-    public PlaceDAO createOpinion(PlaceDAO opinion) {
+    public PlaceDAO createPlace(PlaceDAO opinion) {
         log.debug("Creating opinion: " + opinion);
         return log.traceExit(placeRepository.save(opinion));
     }
