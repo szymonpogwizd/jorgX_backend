@@ -6,10 +6,9 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-public class PlaceInfoDto {
+public class PlaceInfoDTO {
 
     private UUID id;
     private String name;
     private UUID city_id;
-
 }

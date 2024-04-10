@@ -1,16 +1,13 @@
 package pl.jorgX.database.city;
 
-
 import lombok.Data;
 
 import java.util.UUID;
 
 @Data
-public class CityInfoDto {
+public class CityInfoDTO {
 
-    
     private UUID id;
-
     private String city;
 
 }

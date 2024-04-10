@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import pl.jorgX.database.place.PlaceDao;
+import pl.jorgX.database.place.PlaceDAO;
 
 
 import java.util.UUID;
@@ -16,7 +16,8 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = false)
 @Data
 @Table(name = "opinion")
-public class OpinionDao {
+public class OpinionDAO {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -31,12 +32,12 @@ public class OpinionDao {
 
     @ManyToOne
     @JoinColumn( name = "place_id")
-    private PlaceDao place;
+    private PlaceDAO place;
 
-    public OpinionDao() {
-
+    public OpinionDAO() {
     }
-    public OpinionDao(UUID id, String opinion, String nick, PlaceDao place){
+
+    public OpinionDAO(UUID id, String opinion, String nick, PlaceDAO place){
         this.id = id;
         this.opinion = opinion;
         this.nick = nick;

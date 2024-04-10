@@ -7,11 +7,10 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-public class PlaceUpdateDto {
+public class PlaceUpdateDTO {
 
     @NotBlank
     @Size(min = 1, max = 100)
     private String name;
     private UUID city_id;
-
 }

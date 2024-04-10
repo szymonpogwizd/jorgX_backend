@@ -9,5 +9,4 @@ public class JorgXApplication {
     public static void main(String[] args) {
         SpringApplication.run(JorgXApplication.class, args);
     }
-
 }
