@@ -21,13 +21,13 @@ public class CityDAO {
 
     @Column(columnDefinition = "text", nullable = false, unique = true)
     @NotEmpty
-    private String city;
+    private String name;
 
     public CityDAO() {
     }
 
-    public CityDAO(UUID id, String city){
+    public CityDAO(UUID id, String name){
         this.id = id;
-        this.city = city;
+        this.name = name;
     }
 }

@@ -31,7 +31,7 @@ public class OpinionDAO {
     private String opinion;
 
     @ManyToOne
-    @JoinColumn( name = "place_id")
+    @JoinColumn( name = "placeId")
     private PlaceDAO place;
 
     public OpinionDAO() {

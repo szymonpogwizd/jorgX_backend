@@ -25,7 +25,7 @@ public class PlaceDAO {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "city_id")
+    @JoinColumn(name = "cityId")
     private CityDAO city;
 
     public PlaceDAO() {
