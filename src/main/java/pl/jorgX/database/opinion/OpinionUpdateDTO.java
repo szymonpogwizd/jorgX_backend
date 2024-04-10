@@ -7,15 +7,11 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-public class OpinionCreateDto {
+public class OpinionUpdateDTO {
 
     @NotBlank
     @Size(min = 1, max = 100)
-
     private String opinion;
-
     private String nick;
-
-    private UUID placeId;
-
+    private UUID place_id;
 }
