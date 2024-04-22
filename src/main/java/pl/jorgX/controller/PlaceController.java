@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Log4j2
 @RestController
-@RequestMapping("/place")
+@RequestMapping("/dashboard/place")
 @RequiredArgsConstructor
 @CrossOrigin
 public class PlaceController {

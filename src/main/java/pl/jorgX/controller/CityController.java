@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Log4j2
 @RestController
-@RequestMapping("/city")
+@RequestMapping("/dashboard/city")
 @RequiredArgsConstructor
 @CrossOrigin
 public class CityController {
