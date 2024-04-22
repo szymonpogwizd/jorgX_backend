@@ -2,7 +2,6 @@ package pl.jorgX.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pl.jorgX.database.opinion.OpinionCreateDTO;
 import pl.jorgX.database.opinion.OpinionDAO;
@@ -38,7 +37,7 @@ public class OpinionController {
         return log.traceExit(opinionMapper.opinionDAOToOpinionInfoDto(createdOpinion));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/place/{id}")
     public List<OpinionInfoDTO> getOpinionByPlaceId(@PathVariable UUID id) {
         log.debug("Getting opinion by place id: {}", id);
         return log.traceExit(opinionService.getOpinionByPlaceId(id)

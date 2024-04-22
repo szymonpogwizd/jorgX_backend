@@ -25,7 +25,7 @@ public class PlaceController {
 
     private final PlaceService placeService;
     private final PlaceMapper placeMapper;
-    private CityRepository cityRepository;
+    private final CityRepository cityRepository;
 
     @PostMapping
     public PlaceInfoDTO createPlace(@RequestBody @Valid PlaceCreateDTO place) {
