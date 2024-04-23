@@ -4,13 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 import pl.jorgX.database.city.*;
-import pl.jorgX.database.user.UserDAO;
-import pl.jorgX.database.user.UserInfoDTO;
-import pl.jorgX.database.user.UserUpdateDTO;
 import pl.jorgX.services.CityService;
 
 import javax.validation.Valid;
-import javax.validation.ValidationException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -52,14 +48,11 @@ public class CityController {
     }
 
     @PutMapping("{id}")
-    public CityInfoDTO updateUser(@RequestBody @Valid CityUpdateDTO city, @PathVariable UUID id) {
+    public CityInfoDTO updateCity(@RequestBody @Valid CityUpdateDTO city, @PathVariable UUID id) {
         log.debug("Update user {}: {}", id, city);
         CityDAO updatedCity = cityService.update(id, cityMapper.cityUpdateDtoToCityDAO(city));
         return log.traceExit(cityMapper.cityDAOToCityInfoDto(updatedCity));
     }
-
-
-
 
     @DeleteMapping("{id}")
     public void deleteCity(@PathVariable UUID id) {

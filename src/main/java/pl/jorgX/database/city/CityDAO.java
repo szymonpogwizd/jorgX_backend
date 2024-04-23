@@ -23,7 +23,7 @@ public class CityDAO {
     @NotEmpty
     private String name;
 
-    @Column(columnDefinition = "text", nullable = false, unique = true)
+    @Column(columnDefinition = "text")
     @NotEmpty
     private String description;
 
