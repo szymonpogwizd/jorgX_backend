@@ -12,5 +12,10 @@ public class PlaceUpdateDTO {
     @NotBlank
     @Size(min = 1, max = 100)
     private String name;
+    @Size(min = 1, max = 100)
+    private String street;
+    @Size(min = 1, max = 100)
+    private String openingHours;
+    private Double rating;
     private UUID cityId;
 }
