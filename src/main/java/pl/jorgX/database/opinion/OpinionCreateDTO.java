@@ -14,4 +14,5 @@ public class OpinionCreateDTO {
     private String opinion;
     private String nick;
     private UUID placeId;
+    private UUID userId;
 }

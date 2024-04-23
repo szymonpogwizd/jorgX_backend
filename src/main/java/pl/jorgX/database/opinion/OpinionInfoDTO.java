@@ -11,5 +11,6 @@ public class OpinionInfoDTO {
     private String opinion;
     private String nick;
     private UUID placeId;
+    private UUID userId;
 
 }

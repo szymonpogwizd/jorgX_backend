@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import pl.jorgX.database.place.PlaceDAO;
+import pl.jorgX.database.user.UserDAO;
 
 
 import java.util.UUID;
@@ -34,13 +35,18 @@ public class OpinionDAO {
     @JoinColumn( name = "placeId")
     private PlaceDAO place;
 
+    @ManyToOne
+    @JoinColumn( name = "userId")
+    private UserDAO user;
+
     public OpinionDAO() {
     }
 
-    public OpinionDAO(UUID id, String opinion, String nick, PlaceDAO place){
+    public OpinionDAO(UUID id, String opinion, String nick, PlaceDAO place, UserDAO user){
         this.id = id;
         this.opinion = opinion;
         this.nick = nick;
         this.place = place;
+        this.user = user;
     }
 }
