@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.jorgX.database.opinion.OpinionDAO;
 import pl.jorgX.database.opinion.OpinionRepository;
 
+import javax.validation.ValidationException;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,5 +28,24 @@ public class OpinionService {
     public List<OpinionDAO> getOpinionByPlaceId(UUID id) {
         log.debug("Getting opinion by places id: " + id);
         return log.traceExit(opinionRepository.findByPlaceId(id));
+    }
+
+    @Transactional
+    public OpinionDAO update(UUID id, OpinionDAO opinion) {
+        log.debug("Editing opinion {} - {}", id, opinion);
+        OpinionDAO toUpdate = opinionRepository.findById(id)
+                .orElseThrow(() -> new ValidationException("Opinion with id " + id + " was not found"));
+
+        toUpdate.setOpinion(opinion.getOpinion());
+        toUpdate.setNick(opinion.getNick());
+        toUpdate.setUser(opinion.getUser());
+        toUpdate.setPlace(opinion.getPlace());
+
+        return log.traceExit(opinionRepository.save(toUpdate));
+    }
+
+    public void delete(UUID id) {
+        log.debug("Deleting opinion {}", id);
+        opinionRepository.deleteById(id);
     }
 }

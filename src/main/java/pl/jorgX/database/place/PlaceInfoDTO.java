@@ -1,6 +1,5 @@
 package pl.jorgX.database.place;
 
-
 import lombok.Data;
 
 import java.util.UUID;
