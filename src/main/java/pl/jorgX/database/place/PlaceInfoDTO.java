@@ -1,7 +1,7 @@
 package pl.jorgX.database.place;
 
-
 import lombok.Data;
+import pl.jorgX.database.city.CityDAO;
 
 import java.util.UUID;
 
@@ -13,5 +13,5 @@ public class PlaceInfoDTO {
     private String street;
     private String openingHours;
     private double rating;
-    private UUID cityId;
+    private CityDAO city;
 }
