@@ -2,6 +2,8 @@ package pl.jorgX.database.opinion;
 
 import org.mapstruct.Mapper;
 
+import javax.validation.Valid;
+
 @Mapper(
         componentModel = "spring",
         unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE

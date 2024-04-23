@@ -30,7 +30,8 @@ public class PlaceDAO {
     @Column(columnDefinition = "text")
     private String openingHours;
 
-    private double rating;
+    @Column(columnDefinition = "text")
+    private Double rating;
 
     @ManyToOne
     @JoinColumn(name = "cityId")
@@ -39,7 +40,7 @@ public class PlaceDAO {
     public PlaceDAO() {
     }
 
-    public PlaceDAO(UUID id, String name, String street, String openingHours, double rating, CityDAO city) {
+    public PlaceDAO(UUID id, String name, String street, String openingHours, Double rating, CityDAO city) {
         this.id = id;
         this.name = name;
         this.street = street;
