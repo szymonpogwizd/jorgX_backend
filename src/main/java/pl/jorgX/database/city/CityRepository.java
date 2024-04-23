@@ -25,7 +25,5 @@ public interface CityRepository extends JpaRepository<CityDAO, UUID> {
             @Param("id") UUID id,
             @Param("name") String name,
             @Param("description") String description
-
     );
-
 }

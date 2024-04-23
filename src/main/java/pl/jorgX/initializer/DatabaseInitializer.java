@@ -10,10 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class DatabaseInitializer implements CommandLineRunner {
 
     private final UserInitializer userInitializer;
+    private final PlaceInitializer placeInitializer;
+    private final CityInitializer cityInitializer;
 
     @Override
     @Transactional
     public void run(String... args) throws Exception {
         userInitializer.initialize();
+        cityInitializer.initialize();
+        placeInitializer.initialize();
     }
 }

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.jorgX.database.opinion.OpinionDAO;
 import pl.jorgX.database.opinion.OpinionRepository;
-import pl.jorgX.database.opinion.OpinionUpdateDTO;
 
 import javax.validation.ValidationException;
 import java.util.List;

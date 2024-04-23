@@ -3,9 +3,6 @@ package pl.jorgX.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
-import pl.jorgX.database.city.CityDAO;
-import pl.jorgX.database.city.CityInfoDTO;
-import pl.jorgX.database.city.CityUpdateDTO;
 import pl.jorgX.database.opinion.*;
 import pl.jorgX.database.place.PlaceRepository;
 import pl.jorgX.services.OpinionService;
@@ -47,12 +44,10 @@ public class OpinionController {
     }
 
     @PutMapping("{id}")
-    public OpinionInfoDTO updateOpinion(@RequestBody @Valid OpinionUpdateDTO opinion, @PathVariable UUID id)
-    {
-        log.debug("Update opinion {}: {}",id, opinion);
-        OpinionDAO updatedOpinionDAO = opinionService.update(id, opinionMapper.opinionUpdateDtoToOpinionDAO(opinion));
-        OpinionInfoDTO updatedOpinionDTO = opinionMapper.opinionDAOToOpinionInfoDto(updatedOpinionDAO);
-        return log.traceExit(updatedOpinionDTO);
+    public OpinionInfoDTO updateOpinion(@RequestBody @Valid OpinionUpdateDTO opinion, @PathVariable UUID id) {
+        log.debug("Update opinion {}: {}", id, opinion);
+        OpinionDAO updatedOpinion = opinionService.update(id, opinionMapper.opinionUpdateDtoToOpinionDAO(opinion));
+        return log.traceExit(opinionMapper.opinionDAOToOpinionInfoDto(updatedOpinion));
     }
 
     @DeleteMapping("{id}")
