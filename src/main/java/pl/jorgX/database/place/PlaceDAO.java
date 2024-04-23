@@ -34,7 +34,7 @@ public class PlaceDAO {
     private Double rating;
 
     @ManyToOne
-    @JoinColumn(name = "cityId")
+    @JoinColumn(name = "city_id")
     private CityDAO city;
 
     public PlaceDAO() {

@@ -57,7 +57,7 @@ public class OpinionController {
 
     @DeleteMapping("{id}")
     public void deleteOpinion(@PathVariable UUID id) {
-        log.debug("Deleting city {}", id);
+        log.debug("Deleting opinion {}", id);
         opinionService.delete(id);
     }
 }

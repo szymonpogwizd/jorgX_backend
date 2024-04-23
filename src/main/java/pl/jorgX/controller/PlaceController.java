@@ -5,10 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pl.jorgX.database.city.CityRepository;
-import pl.jorgX.database.place.PlaceCreateDTO;
-import pl.jorgX.database.place.PlaceDAO;
-import pl.jorgX.database.place.PlaceInfoDTO;
-import pl.jorgX.database.place.PlaceMapper;
+import pl.jorgX.database.place.*;
 import pl.jorgX.services.PlaceService;
 
 import javax.validation.Valid;
@@ -61,5 +58,20 @@ public class PlaceController {
                 .stream()
                 .map(placeMapper::placeDAOToPlaceInfoDto)
                 .collect(Collectors.toList()));
+    }
+
+    @PutMapping("{id}")
+    public PlaceInfoDTO updatePlace(@RequestBody @Valid PlaceUpdateDTO place, @PathVariable UUID id)
+    {
+        log.debug("Update place {}: {}",id,place);
+        PlaceDAO updatePlace = placeService.update(id, placeMapper.placeUpdateDtoToPlaceDAO(place));
+        PlaceInfoDTO updateInfoPlace = placeMapper.placeDAOToPlaceInfoDto(updatePlace);
+        return  log.traceExit(updateInfoPlace);
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteOpinion(@PathVariable UUID id) {
+        log.debug("Deleting place {}", id);
+        placeService.delete(id);
     }
 }

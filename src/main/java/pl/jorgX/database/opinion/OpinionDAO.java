@@ -32,11 +32,11 @@ public class OpinionDAO {
     private String opinion;
 
     @ManyToOne
-    @JoinColumn( name = "placeId")
+    @JoinColumn( name = "place_id")
     private PlaceDAO place;
 
     @ManyToOne
-    @JoinColumn( name = "userId")
+    @JoinColumn( name = "user_id")
     private UserDAO user;
 
     public OpinionDAO() {

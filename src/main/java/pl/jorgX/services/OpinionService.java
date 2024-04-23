@@ -39,8 +39,6 @@ public class OpinionService {
 
         toUpdate.setOpinion(opinion.getOpinion());
         toUpdate.setNick(opinion.getNick());
-        toUpdate.setUser(opinion.getUser());
-        toUpdate.setPlace(opinion.getPlace());
 
         return log.traceExit(opinionRepository.save(toUpdate));
     }
