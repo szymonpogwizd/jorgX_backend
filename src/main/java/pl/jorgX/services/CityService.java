@@ -7,8 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.jorgX.database.city.CityDAO;
 import pl.jorgX.database.city.CityRepository;
 
+import javax.validation.ValidationException;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Log4j2
@@ -31,5 +33,22 @@ public class CityService {
     public Optional<CityDAO> getCityByName(String name) {
         log.debug("Getting city by name: " + name);
         return log.traceExit(cityRepository.findByName(name));
+    }
+
+    @Transactional
+    public CityDAO update(UUID id, CityDAO city) {
+        log.debug("Editing city {} - {}", id, city);
+        CityDAO toUpdate = cityRepository.findById(id)
+                .orElseThrow(() -> new ValidationException("City with id " + id + " was not found"));
+
+        toUpdate.setName(city.getName());
+        toUpdate.setDescription(city.getDescription());
+
+        return log.traceExit(cityRepository.save(toUpdate));
+    }
+
+    public void delete(UUID id) {
+        log.debug("Deleting city {}", id);
+        cityRepository.deleteById(id);
     }
 }
