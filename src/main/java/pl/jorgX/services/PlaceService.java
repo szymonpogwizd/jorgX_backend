@@ -55,12 +55,17 @@ public class PlaceService {
         log.debug("Editing place {} - {}",id,place);
         PlaceDAO toUpdate = placeRepository.findById(id)
                 .orElseThrow(() -> new ValidationException("Place with id " + id + " was not found"));
+        if (place != null) {
+            toUpdate.setName(place.getName());
+            toUpdate.setOpeningHours(place.getOpeningHours());
+            toUpdate.setStreet(place.getStreet());
 
-        toUpdate.setName(place.getName());
-        toUpdate.setOpeningHours(place.getOpeningHours());
-        toUpdate.setRating(place.getRating());
-        toUpdate.setStreet(place.getStreet());
-        
+            CityDAO city = place.getCity();
+
+            if (city != null) {
+                toUpdate.setCity(city);
+            }
+        }
         return log.traceExit(placeRepository.save(toUpdate));
     }
 }

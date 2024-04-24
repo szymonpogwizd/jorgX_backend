@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.jorgX.database.city.CityDAO;
 import pl.jorgX.database.opinion.OpinionDAO;
 import pl.jorgX.database.opinion.OpinionRepository;
-import pl.jorgX.database.opinion.OpinionUpdateDTO;
+import pl.jorgX.database.place.PlaceDAO;
+import pl.jorgX.database.user.UserDAO;
 
 import javax.validation.ValidationException;
 import java.util.List;
@@ -37,9 +39,24 @@ public class OpinionService {
         OpinionDAO toUpdate = opinionRepository.findById(id)
                 .orElseThrow(() -> new ValidationException("Opinion with id " + id + " was not found"));
 
-        toUpdate.setOpinion(opinion.getOpinion());
-        toUpdate.setNick(opinion.getNick());
+        if (opinion != null) {
+            toUpdate.setOpinion(opinion.getOpinion());
+            toUpdate.setNick(opinion.getNick());
 
+            PlaceDAO place = opinion.getPlace();
+
+            if(place != null)
+            {
+                toUpdate.setPlace(place);
+
+                UserDAO user = opinion.getUser();
+
+                if(user != null)
+                {
+                    toUpdate.setUser(user);
+                }
+            }
+        }
         return log.traceExit(opinionRepository.save(toUpdate));
     }
 
