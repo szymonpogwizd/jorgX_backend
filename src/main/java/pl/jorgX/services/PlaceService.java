@@ -2,10 +2,8 @@ package pl.jorgX.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.jorgX.database.city.CityDAO;
 import pl.jorgX.database.city.CityRepository;
 import pl.jorgX.database.place.PlaceDAO;
 import pl.jorgX.database.place.PlaceRepository;
@@ -21,7 +19,6 @@ import java.util.UUID;
 public class PlaceService {
 
     private final PlaceRepository placeRepository;
-    private final CityRepository cityRepository;
 
     @Transactional
     public PlaceDAO createPlace(PlaceDAO opinion) {
@@ -44,23 +41,22 @@ public class PlaceService {
         return log.traceExit(placeRepository.findByCityId(id));
     }
 
-    public void delete(UUID id) {
-        log.debug("Deleting place {}", id);
-        placeRepository.deleteById(id);
-    }
-
     @Transactional
-    public PlaceDAO update(UUID id, PlaceDAO place)
-    {
-        log.debug("Editing place {} - {}",id,place);
+    public PlaceDAO update(UUID id, PlaceDAO place) {
+        log.debug("Editing place {} - {}", id, place);
         PlaceDAO toUpdate = placeRepository.findById(id)
                 .orElseThrow(() -> new ValidationException("Place with id " + id + " was not found"));
 
         toUpdate.setName(place.getName());
         toUpdate.setOpeningHours(place.getOpeningHours());
-        toUpdate.setRating(place.getRating());
         toUpdate.setStreet(place.getStreet());
-        
+        toUpdate.setCity(place.getCity());
+
         return log.traceExit(placeRepository.save(toUpdate));
+    }
+
+    public void delete(UUID id) {
+        log.debug("Deleting place {}", id);
+        placeRepository.deleteById(id);
     }
 }

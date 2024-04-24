@@ -4,8 +4,6 @@ import org.mapstruct.Mapper;
 import pl.jorgX.database.place.PlaceMapper;
 import pl.jorgX.database.user.UserMapper;
 
-import javax.validation.Valid;
-
 @Mapper(
         componentModel = "spring",
         uses = {PlaceMapper.class, UserMapper.class},

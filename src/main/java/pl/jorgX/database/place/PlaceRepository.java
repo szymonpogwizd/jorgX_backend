@@ -20,14 +20,14 @@ public interface PlaceRepository extends JpaRepository<PlaceDAO, UUID> {
     int countPlaces();
 
     @Modifying
-    @Query(value = "INSERT INTO place (id, name, opening_hours, rating, street, city_id) " +
-            "VALUES (:id, :name, :opening_hours, :rating, :street, :city_id) ON CONFLICT DO NOTHING", nativeQuery = true)
+    @Query(value = "INSERT INTO place (id, name, street, opening_hours, rating, city_Id) " +
+            "VALUES (:id, :name, :street, :openingHours, :rating, :cityId) ON CONFLICT DO NOTHING", nativeQuery = true)
     void insertPlace(
             @Param("id") UUID id,
             @Param("name") String name,
-            @Param("opening_hours") String openingHours,
-            @Param("rating") Double rating,
             @Param("street") String street,
-            @Param("city_id") UUID city_id
+            @Param("openingHours") String openingHours,
+            @Param("rating") double rating,
+            @Param("cityId") UUID cityId
     );
 }
