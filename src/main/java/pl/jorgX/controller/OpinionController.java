@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 import pl.jorgX.database.opinion.*;
 import pl.jorgX.database.place.PlaceRepository;
+import pl.jorgX.database.user.UserRepository;
 import pl.jorgX.services.OpinionService;
 
 import javax.validation.Valid;
@@ -22,14 +23,15 @@ public class OpinionController {
     private final OpinionService opinionService;
     private final OpinionMapper opinionMapper;
     private final PlaceRepository placeRepository;
+    private final UserRepository userRepository;
 
     @PostMapping
     public OpinionInfoDTO createOpinion(@RequestBody @Valid OpinionCreateDTO opinion) {
         log.debug("Create opinion {}", opinion);
         OpinionDAO toCreate = opinionMapper.opinionCreateDtoToOpinionDAO(opinion);
         placeRepository.findById(opinion.getPlaceId()).ifPresent(toCreate::setPlace);
+        userRepository.findById(opinion.getUserId()).ifPresent(toCreate::setUser);
         toCreate.setOpinion(opinion.getOpinion());
-        toCreate.setNick(opinion.getNick());
         OpinionDAO createdOpinion = opinionService.createOpinion(toCreate);
         return log.traceExit(opinionMapper.opinionDAOToOpinionInfoDto(createdOpinion));
     }
