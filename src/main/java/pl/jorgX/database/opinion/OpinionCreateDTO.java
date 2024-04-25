@@ -13,5 +13,5 @@ public class OpinionCreateDTO {
     @Size(min = 1, max = 100)
     private String opinion;
     private UUID placeId;
-    private UUID userId;
+    private String email;
 }

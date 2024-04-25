@@ -30,7 +30,7 @@ public class OpinionController {
         log.debug("Create opinion {}", opinion);
         OpinionDAO toCreate = opinionMapper.opinionCreateDtoToOpinionDAO(opinion);
         placeRepository.findById(opinion.getPlaceId()).ifPresent(toCreate::setPlace);
-        userRepository.findById(opinion.getUserId()).ifPresent(toCreate::setUser);
+        userRepository.findByEmail(opinion.getEmail()).ifPresent(toCreate::setUser);
         toCreate.setOpinion(opinion.getOpinion());
         OpinionDAO createdOpinion = opinionService.createOpinion(toCreate);
         return log.traceExit(opinionMapper.opinionDAOToOpinionInfoDto(createdOpinion));
