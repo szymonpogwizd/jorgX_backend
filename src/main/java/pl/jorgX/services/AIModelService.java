@@ -9,6 +9,8 @@ import pl.jorgX.ModelAPIConnector;
 import pl.jorgX.database.opinion.OpinionType;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @Service
 @Log4j2
@@ -20,6 +22,7 @@ public class AIModelService {
     public OpinionType getOpinionType(String opinion) {
         log.debug("Getting opinion type for opinion: {}", opinion);
         try {
+            opinion = opinion.replace("\"", "\\\"");
             String response = modelClient.makeRequest(opinion);
             double[] predictions = parsePredictions(response);
             return determineOpinionType(predictions);
