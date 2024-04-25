@@ -21,7 +21,7 @@ public interface PlaceRepository extends JpaRepository<PlaceDAO, UUID> {
 
     @Modifying
     @Query("UPDATE PlaceDAO p SET p.rating = :rating WHERE p.id = :id")
-    void updatePlaceRating(@Param("id") UUID id, @Param("rating") double rating);
+    void updatePlaceRating(@Param("id") UUID id, @Param("rating") Double rating);
 
     @Modifying
     @Query(value = "INSERT INTO place (id, name, street, opening_hours, rating, city_Id) " +
@@ -31,7 +31,7 @@ public interface PlaceRepository extends JpaRepository<PlaceDAO, UUID> {
             @Param("name") String name,
             @Param("street") String street,
             @Param("openingHours") String openingHours,
-            @Param("rating") double rating,
+            @Param("rating") Double rating,
             @Param("cityId") UUID cityId
     );
 }

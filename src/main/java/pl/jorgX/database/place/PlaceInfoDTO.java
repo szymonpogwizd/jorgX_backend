@@ -12,6 +12,6 @@ public class PlaceInfoDTO {
     private String name;
     private String street;
     private String openingHours;
-    private double rating;
+    private Double rating;
     private CityDAO city;
 }
