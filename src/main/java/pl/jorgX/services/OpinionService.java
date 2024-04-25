@@ -37,7 +37,6 @@ public class OpinionService {
                 .orElseThrow(() -> new ValidationException("Opinion with id " + id + " was not found"));
 
         toUpdate.setOpinion(opinion.getOpinion());
-        toUpdate.setNick(opinion.getNick());
         toUpdate.setUser(opinion.getUser());
         toUpdate.setPlace(opinion.getPlace());
 

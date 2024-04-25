@@ -12,7 +12,6 @@ public class OpinionCreateDTO {
     @NotBlank
     @Size(min = 1, max = 100)
     private String opinion;
-    private String nick;
     private UUID placeId;
     private UUID userId;
 }

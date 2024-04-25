@@ -6,7 +6,7 @@ import pl.jorgX.database.user.UserMapper;
 
 @Mapper(
         componentModel = "spring",
-        uses = {PlaceMapper.class, UserMapper.class},
+        uses = {UserMapper.class, PlaceMapper.class},
         unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE
 )
 public interface OpinionMapper {
