@@ -17,10 +17,12 @@ import java.util.UUID;
 public class OpinionService {
 
     private final OpinionRepository opinionRepository;
+    private final AIModelService aiModelService;
 
     @Transactional
     public OpinionDAO createOpinion(OpinionDAO opinion) {
         log.debug("Creating opinion: " + opinion);
+        opinion.setOpinionType(aiModelService.getOpinionType(opinion.getOpinion()));
         return log.traceExit(opinionRepository.save(opinion));
     }
 

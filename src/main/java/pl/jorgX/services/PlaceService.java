@@ -4,12 +4,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.jorgX.database.city.CityRepository;
+import pl.jorgX.database.opinion.OpinionDAO;
+import pl.jorgX.database.opinion.OpinionType;
 import pl.jorgX.database.place.PlaceDAO;
 import pl.jorgX.database.place.PlaceRepository;
 
 import javax.validation.ValidationException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,6 +21,7 @@ import java.util.UUID;
 public class PlaceService {
 
     private final PlaceRepository placeRepository;
+    private final OpinionService opinionService;
 
     @Transactional
     public PlaceDAO createPlace(PlaceDAO opinion) {
@@ -58,5 +61,37 @@ public class PlaceService {
     public void delete(UUID id) {
         log.debug("Deleting place {}", id);
         placeRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void updateRatingForPlace(UUID placeId) {
+        List<OpinionType> opinionTypeList = opinionService.getOpinionByPlaceId(placeId).stream().map(OpinionDAO::getOpinionType).toList();
+        Double newRating = calculateNewRating(opinionTypeList);
+        placeRepository.updatePlaceRating(placeId, newRating);
+    }
+
+    private Double calculateNewRating(List<OpinionType> opinions) {
+        List<Double> ratings = opinions.stream()
+                .map(this::getRatingFromOpinionType)
+                .filter(Objects::nonNull)
+                .toList();
+
+        if (ratings.isEmpty()) {
+            return null;
+        }
+
+        double sum = ratings.stream().mapToDouble(Double::doubleValue).sum();
+        double average = sum / ratings.size();
+        return Math.round(average * 100.0) / 100.0;
+    }
+
+
+    private Double getRatingFromOpinionType(OpinionType opinionType) {
+        return switch (opinionType) {
+            case POSITIVE -> 5.0;
+            case AMBIGUOUS -> 3.0;
+            case NEGATIVE -> 1.0;
+            case NEUTRAL -> null;
+        };
     }
 }
