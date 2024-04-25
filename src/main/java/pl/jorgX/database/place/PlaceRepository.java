@@ -20,6 +20,10 @@ public interface PlaceRepository extends JpaRepository<PlaceDAO, UUID> {
     int countPlaces();
 
     @Modifying
+    @Query("UPDATE PlaceDAO p SET p.rating = :rating WHERE p.id = :id")
+    void updatePlaceRating(@Param("id") UUID id, @Param("rating") double rating);
+
+    @Modifying
     @Query(value = "INSERT INTO place (id, name, street, opening_hours, rating, city_Id) " +
             "VALUES (:id, :name, :street, :openingHours, :rating, :cityId) ON CONFLICT DO NOTHING", nativeQuery = true)
     void insertPlace(

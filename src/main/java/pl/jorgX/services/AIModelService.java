@@ -1,7 +1,9 @@
 package pl.jorgX.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -9,8 +11,6 @@ import pl.jorgX.ModelAPIConnector;
 import pl.jorgX.database.opinion.OpinionType;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 @Service
 @Log4j2
@@ -22,7 +22,7 @@ public class AIModelService {
     public OpinionType getOpinionType(String opinion) {
         log.debug("Getting opinion type for opinion: {}", opinion);
         try {
-            opinion = opinion.replace("\"", "\\\"");
+            opinion = encodeJsonString (opinion);
             String response = modelClient.makeRequest(opinion);
             double[] predictions = parsePredictions(response);
             return determineOpinionType(predictions);
@@ -30,6 +30,13 @@ public class AIModelService {
             log.error("Error parsing predictions: ", e);
             return null;
         }
+    }
+
+    private String encodeJsonString(String opinion) {
+        return opinion.replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r");
     }
 
     private double[] parsePredictions(String jsonResponse) throws IOException {

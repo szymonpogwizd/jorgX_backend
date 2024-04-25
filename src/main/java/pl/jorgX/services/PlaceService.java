@@ -4,7 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.jorgX.database.city.CityRepository;
+import pl.jorgX.database.opinion.OpinionDAO;
+import pl.jorgX.database.opinion.OpinionType;
 import pl.jorgX.database.place.PlaceDAO;
 import pl.jorgX.database.place.PlaceRepository;
 
@@ -19,6 +20,7 @@ import java.util.UUID;
 public class PlaceService {
 
     private final PlaceRepository placeRepository;
+    private final OpinionService opinionService;
 
     @Transactional
     public PlaceDAO createPlace(PlaceDAO opinion) {
@@ -58,5 +60,32 @@ public class PlaceService {
     public void delete(UUID id) {
         log.debug("Deleting place {}", id);
         placeRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void updateRatingForPlace(UUID placeId) {
+        List<OpinionType> opinionTypeList = opinionService.getOpinionByPlaceId(placeId).stream().map(OpinionDAO::getOpinionType).toList();
+        double newRating = calculateNewRating(opinionTypeList);
+        placeRepository.updatePlaceRating(placeId, newRating);
+    }
+
+    private double calculateNewRating(List<OpinionType> opinions) {
+        if (opinions.isEmpty()) {
+            return 0;
+        }
+        double sum = opinions.stream()
+                .mapToDouble(this::getRatingFromOpinionType)
+                .sum();
+        double average = sum / opinions.size();
+        return Math.round(average * 100.0) / 100.0;
+    }
+
+
+    private double getRatingFromOpinionType(OpinionType opinionType) {
+        return switch (opinionType) {
+            case POSITIVE -> 5.0;
+            case AMBIGUOUS, NEUTRAL -> 3.0;
+            case NEGATIVE -> 1.0;
+        };
     }
 }

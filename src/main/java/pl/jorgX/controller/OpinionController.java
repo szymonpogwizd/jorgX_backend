@@ -7,6 +7,7 @@ import pl.jorgX.database.opinion.*;
 import pl.jorgX.database.place.PlaceRepository;
 import pl.jorgX.database.user.UserRepository;
 import pl.jorgX.services.OpinionService;
+import pl.jorgX.services.PlaceService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 public class OpinionController {
 
     private final OpinionService opinionService;
+    private final PlaceService placeService;
     private final OpinionMapper opinionMapper;
     private final PlaceRepository placeRepository;
     private final UserRepository userRepository;
@@ -33,6 +35,7 @@ public class OpinionController {
         userRepository.findByEmail(opinion.getEmail()).ifPresent(toCreate::setUser);
         toCreate.setOpinion(opinion.getOpinion());
         OpinionDAO createdOpinion = opinionService.createOpinion(toCreate);
+        placeService.updateRatingForPlace(createdOpinion.getPlace().getId());
         return log.traceExit(opinionMapper.opinionDAOToOpinionInfoDto(createdOpinion));
     }
 
