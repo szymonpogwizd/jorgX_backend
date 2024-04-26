@@ -29,6 +29,8 @@ public class PlaceController {
         PlaceDAO toCreate = placeMapper.placeCreateDtoToPlaceDAO(place);
         cityRepository.findById(place.getCityId()).ifPresent(toCreate::setCity);
         toCreate.setName(place.getName());
+        toCreate.setStreet(place.getStreet());
+        toCreate.setOpeningHours(place.getOpeningHours());
         PlaceDAO createdPlace = placeService.createPlace(toCreate);
         return log.traceExit(placeMapper.placeDAOToPlaceInfoDto(createdPlace));
     }

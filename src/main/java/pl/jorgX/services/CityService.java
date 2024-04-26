@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.jorgX.database.city.CityCreateDTO;
 import pl.jorgX.database.city.CityDAO;
+import pl.jorgX.database.city.CityMapper;
 import pl.jorgX.database.city.CityRepository;
 
 import javax.validation.ValidationException;
@@ -18,6 +20,7 @@ import java.util.UUID;
 public class CityService {
 
     private final CityRepository cityRepository;
+    private final CityMapper cityMapper;
 
     @Transactional
     public CityDAO createCity(CityDAO city) {
@@ -42,7 +45,6 @@ public class CityService {
                 .orElseThrow(() -> new ValidationException("City with id " + id + " was not found"));
 
         toUpdate.setName(city.getName());
-        toUpdate.setDescription(city.getDescription());
 
         return log.traceExit(cityRepository.save(toUpdate));
     }
@@ -50,5 +52,17 @@ public class CityService {
     public void delete(UUID id) {
         log.debug("Deleting city {}", id);
         cityRepository.deleteById(id);
+    }
+
+    @Transactional
+    public UUID getOrCreateCityId(CityCreateDTO cityCreateDTO) {
+        return cityRepository.findByName(cityCreateDTO.getName())
+                .map(CityDAO::getId)
+                .orElseGet(() -> {
+                    CityDAO newCity = cityMapper.cityCreateDtoToCityDAO(cityCreateDTO);
+                    newCity.setName(cityCreateDTO.getName());
+                    cityRepository.save(newCity);
+                    return newCity.getId();
+                });
     }
 }
