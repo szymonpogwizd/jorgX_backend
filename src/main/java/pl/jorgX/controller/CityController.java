@@ -49,7 +49,7 @@ public class CityController {
 
     @PutMapping("{id}")
     public CityInfoDTO updateCity(@RequestBody @Valid CityUpdateDTO city, @PathVariable UUID id) {
-        log.debug("Update user {}: {}", id, city);
+        log.debug("Update city {}: {}", id, city);
         CityDAO updatedCity = cityService.update(id, cityMapper.cityUpdateDtoToCityDAO(city));
         return log.traceExit(cityMapper.cityDAOToCityInfoDto(updatedCity));
     }
