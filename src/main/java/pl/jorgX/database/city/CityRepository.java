@@ -19,11 +19,10 @@ public interface CityRepository extends JpaRepository<CityDAO, UUID> {
 
 
     @Modifying
-    @Query(value = "INSERT INTO city (id, name, description) " +
-            "VALUES (:id, :name, :description) ON CONFLICT DO NOTHING", nativeQuery = true)
+    @Query(value = "INSERT INTO city (id, name) " +
+            "VALUES (:id, :name) ON CONFLICT DO NOTHING", nativeQuery = true)
     void insertCity(
             @Param("id") UUID id,
-            @Param("name") String name,
-            @Param("description") String description
+            @Param("name") String name
     );
 }

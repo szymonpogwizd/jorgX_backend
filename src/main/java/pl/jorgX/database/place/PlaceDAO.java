@@ -20,7 +20,7 @@ public class PlaceDAO {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(columnDefinition = "text", nullable = false, unique = true)
+    @Column(columnDefinition = "text", nullable = false)
     @NotEmpty
     private String name;
 
