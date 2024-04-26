@@ -11,6 +11,9 @@ CREATE TABLE IF NOT EXISTS city (
 CREATE TABLE IF NOT EXISTS place (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     name TEXT NOT NULL,
+    openinghours TEXT,
+    street TEXT,
+    rating double precision,
     city_id UUID,
     FOREIGN KEY (city_id) REFERENCES city(id)
 );

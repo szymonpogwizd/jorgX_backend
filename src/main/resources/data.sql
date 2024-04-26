@@ -5,10 +5,10 @@ INSERT INTO city (id, description, name) VALUES
     ('b86f4ca2-3599-4866-9926-c51ccb5da0a2', 'Coastal city', 'Gdansk');
 
 -- Wstawianie przykładowych danych dla tabeli place
-INSERT INTO place (id, name, city_id) VALUES
-    ('b5b32817-c4ac-433f-9043-da8b4bf09c1d', 'Royal Castle', '6c4b6077-1122-40f6-b781-0f93078b6a9b'),
-    ('7ea53360-5626-4a95-8281-7318ab043129', 'Wawel Castle', '280ebb24-0d75-4d6b-845f-4cab3cd698ea'),
-    ('5b00e8c4-db34-413e-b1bf-efe4ad4872f4', 'Old Town', 'b86f4ca2-3599-4866-9926-c51ccb5da0a2');
+INSERT INTO place (id, name, openinghours, street, rating, city_id) VALUES
+    ('b5b32817-c4ac-433f-9043-da8b4bf09c1d', 'Royal Castle', '8-16', 'Mickiewicza 6', 2,'6c4b6077-1122-40f6-b781-0f93078b6a9b'),
+    ('7ea53360-5626-4a95-8281-7318ab043129', 'Wawel Castle', '8-16', 'Słowackiego 2', 5,'280ebb24-0d75-4d6b-845f-4cab3cd698ea'),
+    ('5b00e8c4-db34-413e-b1bf-efe4ad4872f4', 'Old Town', '8-16', 'Batorego 4', 5, 'b86f4ca2-3599-4866-9926-c51ccb5da0a2');
 
 -- Wstawianie przykładowych danych dla tabeli users
 INSERT INTO users (id, active, default_item, email, name, password, token, token_expiration, user_type) VALUES

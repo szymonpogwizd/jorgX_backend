@@ -51,7 +51,7 @@ public class PlaceService {
                 .orElseThrow(() -> new ValidationException("Place with id " + id + " was not found"));
 
         toUpdate.setName(place.getName());
-        toUpdate.setOpeningHours(place.getOpeningHours());
+        toUpdate.setOpeninghours(place.getOpeninghours());
         toUpdate.setStreet(place.getStreet());
         toUpdate.setCity(place.getCity());
 

@@ -27,8 +27,8 @@ public class PlaceDAO {
     @Column(columnDefinition = "text")
     private String street;
 
-    @Column(columnDefinition = "text")
-    private String openingHours;
+    @Column(name = "openinghours", columnDefinition = "text")
+    private String openinghours;
 
     private Double rating;
 
@@ -39,11 +39,11 @@ public class PlaceDAO {
     public PlaceDAO() {
     }
 
-    public PlaceDAO(UUID id, String name, String street, String openingHours, Double rating, CityDAO city) {
+    public PlaceDAO(UUID id, String name, String street, String openinghours, Double rating, CityDAO city) {
         this.id = id;
         this.name = name;
         this.street = street;
-        this.openingHours = openingHours;
+        this.openinghours = openinghours;
         this.rating = rating;
         this.city = city;
     }

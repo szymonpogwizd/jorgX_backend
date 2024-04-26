@@ -11,13 +11,13 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     private final UserInitializer userInitializer;
     private final CityInitializer cityInitializer;
-    private final PlaceInitializer placeInitializer;
+
 
     @Override
     @Transactional
     public void run(String... args) throws Exception {
         userInitializer.initialize();
         cityInitializer.initialize();
-        placeInitializer.initialize();
+
     }
 }
