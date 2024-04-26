@@ -16,6 +16,6 @@ INSERT INTO users (id, active, default_item, email, name, password, token, token
     ('031c9c5c-99c2-47be-b1b6-e4662b9a6682', true, false, 'jane.smith@example.com', 'Jane Smith', 'hashed_password', NULL, NULL, 'user');
 
 -- Wstawianie przykładowych danych dla tabeli opinion
-INSERT INTO opinion (id, nick, opinion, place_id, user_id) VALUES
-    ('e9153f65-429f-46b2-a829-c656b74fe5d6', 'john_doe', 'Nice place to visit!', 'b5b32817-c4ac-433f-9043-da8b4bf09c1d', '08b4605f-ec0d-49df-9914-fa3ccce3ca19'),
-    ('fcbd049a-2f5e-4b60-a9e9-2c1b74440b87', 'jane_smith', 'Amazing atmosphere!', '7ea53360-5626-4a95-8281-7318ab043129', '031c9c5c-99c2-47be-b1b6-e4662b9a6682');
+INSERT INTO opinion (id, opinion, place_id, user_id) VALUES
+    ('e9153f65-429f-46b2-a829-c656b74fe5d6', 'Nice place to visit!', 'b5b32817-c4ac-433f-9043-da8b4bf09c1d', '08b4605f-ec0d-49df-9914-fa3ccce3ca19'),
+    ('fcbd049a-2f5e-4b60-a9e9-2c1b74440b87', 'Amazing atmosphere!', '7ea53360-5626-4a95-8281-7318ab043129', '031c9c5c-99c2-47be-b1b6-e4662b9a6682');

@@ -3,7 +3,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp" SCHEMA public;
 -- Tworzenie tabeli city
 CREATE TABLE IF NOT EXISTS city (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    description TEXT ,
+    description TEXT NOT NULL,
     name TEXT NOT NULL
 );
 
@@ -31,7 +31,6 @@ CREATE TABLE IF NOT EXISTS users (
 -- Tworzenie tabeli opinion
 CREATE TABLE IF NOT EXISTS opinion (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    nick TEXT NOT NULL,
     opinion TEXT NOT NULL,
     place_id UUID,
     user_id UUID,
