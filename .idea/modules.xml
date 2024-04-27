@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/jazdaz.jorgX_backend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/jazdaz.jorgX_backend.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/jorgX_backend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/jorgX_backend.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jorgX_backend.test.iml" filepath="$PROJECT_DIR$/.idea/modules/jorgX_backend.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/test/test.iml" filepath="$PROJECT_DIR$/src/test/test.iml" />
     </modules>
   </component>
 </project>

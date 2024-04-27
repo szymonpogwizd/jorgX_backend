@@ -14,7 +14,10 @@ import java.util.UUID;
 public interface PlaceRepository extends JpaRepository<PlaceDAO, UUID> {
 
     List<PlaceDAO> findByCityId(UUID cityId);
+
     Optional<PlaceDAO> findByName(String name);
+
+    Optional<PlaceDAO> findByStreet(String street);
 
     @Query("SELECT COUNT(p) FROM PlaceDAO p")
     int countPlaces();

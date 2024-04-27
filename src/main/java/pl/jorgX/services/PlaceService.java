@@ -8,6 +8,7 @@ import pl.jorgX.database.opinion.OpinionDAO;
 import pl.jorgX.database.opinion.OpinionType;
 import pl.jorgX.database.place.PlaceDAO;
 import pl.jorgX.database.place.PlaceRepository;
+import pl.jorgX.validator.PlaceValidator;
 
 import javax.validation.ValidationException;
 import java.util.List;
@@ -22,16 +23,24 @@ public class PlaceService {
 
     private final PlaceRepository placeRepository;
     private final OpinionService opinionService;
+    private final PlaceValidator placeValidator;
 
     @Transactional
     public PlaceDAO createPlace(PlaceDAO opinion) {
         log.debug("Creating opinion: " + opinion);
+        placeValidator.validatePlace(opinion, false);
         return log.traceExit(placeRepository.save(opinion));
     }
 
     public List<PlaceDAO> getAll() {
         log.debug("Getting all opinions");
         return log.traceExit(placeRepository.findAll());
+    }
+
+    public Optional<PlaceDAO> findByStreet(String street)
+    {
+        log.debug("Getting place by street: " + street);
+        return log.traceExit(placeRepository.findByStreet(street));
     }
 
     public Optional<PlaceDAO> getPlaceByName(String name) {
@@ -47,6 +56,8 @@ public class PlaceService {
     @Transactional
     public PlaceDAO update(UUID id, PlaceDAO place) {
         log.debug("Editing place {} - {}", id, place);
+        boolean isSamePlace = placeValidator.checkIfSamePlace(id, place);
+        placeValidator.validatePlace(place,isSamePlace);
         PlaceDAO toUpdate = placeRepository.findById(id)
                 .orElseThrow(() -> new ValidationException("Place with id " + id + " was not found"));
 

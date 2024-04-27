@@ -29,8 +29,6 @@ public class PlaceController {
         PlaceDAO toCreate = placeMapper.placeCreateDtoToPlaceDAO(place);
         cityRepository.findById(place.getCityId()).ifPresent(toCreate::setCity);
         toCreate.setName(place.getName());
-        toCreate.setStreet(place.getStreet());
-        toCreate.setOpeningHours(place.getOpeningHours());
         PlaceDAO createdPlace = placeService.createPlace(toCreate);
         return log.traceExit(placeMapper.placeDAOToPlaceInfoDto(createdPlace));
     }
@@ -42,6 +40,15 @@ public class PlaceController {
                 .stream()
                 .map(placeMapper::placeDAOToPlaceInfoDto)
                 .collect(Collectors.toList()));
+    }
+
+    @GetMapping("/info/{street}")
+    public PlaceInfoDTO findByStreetName(@PathVariable String street)
+    {
+        log.debug("Getting place by street name: {} ",street);
+        return log.traceExit(placeService.findByStreet(street))
+                .map(placeMapper::placeDAOToPlaceInfoDto)
+                .orElseThrow(() -> new RuntimeException("Place not found"));
     }
 
     @GetMapping("/{name}")
