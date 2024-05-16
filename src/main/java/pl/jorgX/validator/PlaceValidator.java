@@ -21,8 +21,10 @@ public class PlaceValidator {
     public boolean checkIfSamePlace(UUID id, PlaceDAO placeDAO)
     {
         Optional<PlaceDAO> optionalPlaceDAO1 = placeRepository.findByStreet(placeDAO.getStreet());
+        Optional<PlaceDAO> placeDAO1 = placeRepository.findByName(placeDAO.getName());
         boolean isSamePlaceByStreet = optionalPlaceDAO1.isPresent() && optionalPlaceDAO1.get().getId().equals(id);
-        return isSamePlaceByStreet;
+        boolean isSamePlaceByName = placeDAO1.isPresent() && placeDAO1.get().getId().equals(id);
+        return isSamePlaceByStreet && isSamePlaceByName;
     }
 
     public void validatePlace( PlaceDAO placeDAO, boolean isSamePlace)
@@ -37,9 +39,9 @@ public class PlaceValidator {
         if(!isSamePlace)
         {
 
-            if (placeRepository.findByStreet(placeDAO.getStreet()).isPresent())
+            if (placeRepository.findByNameAndStreet(placeDAO.getName(),placeDAO.getStreet()).isPresent())
             {
-                validationErrors.add("Miejsce o tym samym adresie już istnieje\n");
+                validationErrors.add("Miejsce o tym samym adresie i nazwie już istnieje\n");
             }
         }
 
