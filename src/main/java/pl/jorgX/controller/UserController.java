@@ -59,6 +59,12 @@ public class UserController {
         );
     }
 
+    @GetMapping("/userType/{email}")
+    public UserType getUserType(@PathVariable String email) {
+        log.debug("Getting user type by email: {}", email);
+        return log.traceExit(userService.getUserTypeByEmail(email));
+    }
+
     @DeleteMapping("{id}")
     public void deleteUser(@PathVariable UUID id) {
         log.debug("Deleting user {}", id);

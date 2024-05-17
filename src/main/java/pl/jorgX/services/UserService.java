@@ -83,4 +83,11 @@ public class UserService {
         log.debug("Getting all user types");
         return log.traceExit(List.of(UserType.values()));
     }
+
+    public UserType getUserTypeByEmail(String email) {
+        log.debug("Getting user type by email: {}", email);
+        return log.traceExit(userRepository.findByEmail(email)
+                .map(UserDAO::getUserType)
+                .orElseThrow(() -> new ValidationException("User with email " + email + " was not found")));
+    }
 }
