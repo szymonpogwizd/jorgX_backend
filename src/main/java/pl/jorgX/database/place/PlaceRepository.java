@@ -16,6 +16,9 @@ public interface PlaceRepository extends JpaRepository<PlaceDAO, UUID> {
     List<PlaceDAO> findByCityId(UUID cityId);
     Optional<PlaceDAO> findByName(String name);
 
+    @Query("SELECT o.place FROM OpinionDAO o WHERE o.id = :opinionId")
+    Optional<PlaceDAO> findByOpinionId(@Param("opinionId") UUID opinionId);
+
     @Query("SELECT COUNT(p) FROM PlaceDAO p")
     int countPlaces();
 

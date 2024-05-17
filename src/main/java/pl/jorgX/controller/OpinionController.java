@@ -2,8 +2,11 @@ package pl.jorgX.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.jorgX.database.opinion.*;
+import pl.jorgX.database.place.PlaceDAO;
 import pl.jorgX.database.place.PlaceRepository;
 import pl.jorgX.database.user.UserRepository;
 import pl.jorgX.services.OpinionService;
@@ -11,6 +14,7 @@ import pl.jorgX.services.PlaceService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -56,8 +60,17 @@ public class OpinionController {
     }
 
     @DeleteMapping("{id}")
-    public void deleteOpinion(@PathVariable UUID id) {
-        log.debug("Deleting city {}", id);
-        opinionService.delete(id);
+    public ResponseEntity<String> deleteOpinion(@PathVariable UUID id) {
+        log.debug("Deleting opinion {}", id);
+        Optional<PlaceDAO> placeDAO = placeService.getPlaceByOpinionId(id);
+
+        if (placeDAO.isPresent()) {
+            opinionService.delete(id);
+            placeService.updateRatingForPlace(placeDAO.get().getId());
+            return ResponseEntity.ok("Opinion deleted and place rating updated");
+        } else {
+            log.error("Place for opinion {} not found", id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Place not found for the given opinion ID");
+        }
     }
 }
