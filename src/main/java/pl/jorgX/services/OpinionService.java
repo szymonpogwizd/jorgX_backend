@@ -6,9 +6,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.jorgX.database.opinion.OpinionDAO;
 import pl.jorgX.database.opinion.OpinionRepository;
+import pl.jorgX.database.place.PlaceDAO;
+import pl.jorgX.database.user.UserDAO;
 
 import javax.validation.ValidationException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -30,6 +33,12 @@ public class OpinionService {
     public List<OpinionDAO> getOpinionByPlaceId(UUID id) {
         log.debug("Getting opinion by places id: " + id);
         return log.traceExit(opinionRepository.findByPlaceId(id));
+    }
+
+    public Optional<OpinionDAO> findByUserAndPlace(UserDAO userID, PlaceDAO placeID)
+    {
+        log.debug("Getting opinion by user: " + userID + " and place: "+ placeID);
+        return log.traceExit(opinionRepository.findByUserAndPlace(userID, placeID));
     }
 
     @Transactional

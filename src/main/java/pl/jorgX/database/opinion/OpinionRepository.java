@@ -5,14 +5,19 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import pl.jorgX.database.place.PlaceDAO;
+import pl.jorgX.database.user.UserDAO;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface OpinionRepository extends JpaRepository<OpinionDAO, UUID> {
 
     List<OpinionDAO> findByPlaceId(UUID placeId);
+
+    Optional<OpinionDAO> findByUserAndPlace(UserDAO userDAO, PlaceDAO placeDAO);
 
     @Query("SELECT COUNT(o) FROM OpinionDAO o")
     int countOpinions();
