@@ -72,6 +72,6 @@ public class UserValidator {
             user.setUserType(UserType.USER);
         } else if (userType == UserType.ADMINISTRATOR) {
             user.setUserType(UserType.ADMINISTRATOR);
-        }
+        } else user.setUserType(UserType.USER);
     }
 }
