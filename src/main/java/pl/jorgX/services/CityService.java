@@ -8,6 +8,7 @@ import pl.jorgX.database.city.CityCreateDTO;
 import pl.jorgX.database.city.CityDAO;
 import pl.jorgX.database.city.CityMapper;
 import pl.jorgX.database.city.CityRepository;
+import pl.jorgX.validator.CityValidator;
 
 import javax.validation.ValidationException;
 import java.util.List;
@@ -21,10 +22,12 @@ public class CityService {
 
     private final CityRepository cityRepository;
     private final CityMapper cityMapper;
+    private final CityValidator cityValidator;
 
     @Transactional
     public CityDAO createCity(CityDAO city) {
         log.debug("Creating city: " + city);
+        cityValidator.ValidateCity(city,false);
         return log.traceExit(cityRepository.save(city));
     }
 
@@ -41,6 +44,8 @@ public class CityService {
     @Transactional
     public CityDAO update(UUID id, CityDAO city) {
         log.debug("Editing city {} - {}", id, city);
+        boolean isSameCity = cityValidator.checkSameCity(id, city);
+        cityValidator.ValidateCity(city,isSameCity);
         CityDAO toUpdate = cityRepository.findById(id)
                 .orElseThrow(() -> new ValidationException("City with id " + id + " was not found"));
 

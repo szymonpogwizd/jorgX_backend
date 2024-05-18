@@ -41,7 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(classes = MapperConfiguration.class)
 @RunWith(SpringRunner.class)
 @WebMvcTest(UserControllerTest.class)
-@WithMockUser( username = "userop", roles = "USER")
+@WithMockUser( username = "user", roles = "USER")
 public class UserControllerTest {
 
     @Autowired
