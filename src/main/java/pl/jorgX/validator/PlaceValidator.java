@@ -20,7 +20,7 @@ public class PlaceValidator {
 
     public boolean checkIfSamePlace(UUID id, PlaceDAO placeDAO)
     {
-        Optional<PlaceDAO> optionalPlaceDAO1 = placeRepository.findByStreet(placeDAO.getStreet());
+        Optional<PlaceDAO> optionalPlaceDAO1 = placeRepository.findByName(placeDAO.getStreet());
         Optional<PlaceDAO> placeDAO1 = placeRepository.findByName(placeDAO.getName());
         boolean isSamePlaceByStreet = optionalPlaceDAO1.isPresent() && optionalPlaceDAO1.get().getId().equals(id);
         boolean isSamePlaceByName = placeDAO1.isPresent() && placeDAO1.get().getId().equals(id);

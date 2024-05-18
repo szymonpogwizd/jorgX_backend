@@ -49,6 +49,12 @@ public class PlaceService {
         return log.traceExit(placeRepository.findByOpinionId(id));
     }
 
+    public Optional<PlaceDAO> findByNameAndStreet(String street, String name)
+    {
+        log.debug("Getting place by street: " + street + " and name: "+ name);
+        return log.traceExit(placeRepository.findByNameAndStreet(street,name));
+    }
+
     @Transactional
     public PlaceDAO update(UUID id, PlaceDAO place) {
         log.debug("Editing place {} - {}", id, place);
