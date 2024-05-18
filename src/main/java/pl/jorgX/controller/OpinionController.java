@@ -56,7 +56,13 @@ public class OpinionController {
     public OpinionInfoDTO updateOpinion(@RequestBody @Valid OpinionUpdateDTO opinion, @PathVariable UUID id) {
         log.debug("Update opinion {}: {}", id, opinion);
         OpinionDAO updatedOpinion = opinionService.update(id, opinionMapper.opinionUpdateDtoToOpinionDAO(opinion));
+        updatePlaceRatingForOpinion(id);
         return log.traceExit(opinionMapper.opinionDAOToOpinionInfoDto(updatedOpinion));
+    }
+
+    private void updatePlaceRatingForOpinion(UUID opinionId) {
+        Optional<PlaceDAO> placeDAO = placeService.getPlaceByOpinionId(opinionId);
+        placeDAO.ifPresent(dao -> placeService.updateRatingForPlace(dao.getId()));
     }
 
     @DeleteMapping("{id}")
