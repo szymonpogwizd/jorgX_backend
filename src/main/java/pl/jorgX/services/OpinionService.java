@@ -39,8 +39,7 @@ public class OpinionService {
                 .orElseThrow(() -> new ValidationException("Opinion with id " + id + " was not found"));
 
         toUpdate.setOpinion(opinion.getOpinion());
-        toUpdate.setUser(opinion.getUser());
-        toUpdate.setPlace(opinion.getPlace());
+        toUpdate.setOpinionType(aiModelService.getOpinionType(opinion.getOpinion()));
 
         return log.traceExit(opinionRepository.save(toUpdate));
     }

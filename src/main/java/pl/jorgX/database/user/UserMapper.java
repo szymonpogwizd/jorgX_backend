@@ -18,5 +18,6 @@ public interface UserMapper {
     @Mapping(target = "password", qualifiedBy = EncodedMapping.class)
     UserDAO userCreateDTO2UserDAO(UserCreateDTO userCreateDTO);
 
+    @Mapping(target = "password", qualifiedBy = EncodedMapping.class)
     UserDAO userUpdateDTO2UserDAO(UserUpdateDTO userUpdateDTO);
 }
