@@ -8,6 +8,7 @@ import pl.jorgX.database.opinion.OpinionDAO;
 import pl.jorgX.database.opinion.OpinionRepository;
 import pl.jorgX.database.place.PlaceDAO;
 import pl.jorgX.database.user.UserDAO;
+import pl.jorgX.validator.OpinionValid;
 
 import javax.validation.ValidationException;
 import java.util.List;
@@ -21,10 +22,12 @@ public class OpinionService {
 
     private final OpinionRepository opinionRepository;
     private final AIModelService aiModelService;
+    private final OpinionValid opinionValid;
 
     @Transactional
     public OpinionDAO createOpinion(OpinionDAO opinion) {
         log.debug("Creating opinion: " + opinion);
+        opinionValid.validateOpinion(opinion,false,false);
         opinion.setOpinionType(aiModelService.getOpinionType(opinion.getOpinion()));
         return log.traceExit(opinionRepository.save(opinion));
     }
@@ -44,12 +47,15 @@ public class OpinionService {
     @Transactional
     public OpinionDAO update(UUID id, OpinionDAO opinion) {
         log.debug("Editing opinion {} - {}", id, opinion);
-        OpinionDAO toUpdate = opinionRepository.findById(id)
-                .orElseThrow(() -> new ValidationException("Opinion with id " + id + " was not found"));
 
+        System.out.println("Id: " + opinion);
+
+        boolean isSameOpinion = opinionValid.checkIfSameOpinion(opinion);
+        opinionValid.validateOpinion(opinion,isSameOpinion,true);
+        OpinionDAO toUpdate = opinionRepository.findById(id)
+               .orElseThrow(() -> new ValidationException("Opinion with id " + id + " was not found"));
         toUpdate.setOpinion(opinion.getOpinion());
         toUpdate.setOpinionType(aiModelService.getOpinionType(opinion.getOpinion()));
-
         return log.traceExit(opinionRepository.save(toUpdate));
     }
 

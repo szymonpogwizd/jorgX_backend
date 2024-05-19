@@ -29,5 +29,6 @@ public interface OpinionRepository extends JpaRepository<OpinionDAO, UUID> {
                        @Param("opinion") String opinion,
                        @Param("opinionType") OpinionType opinionType,
                        @Param("placeId") UUID placeId,
-                       @Param("userId") UUID userId);
+                       @Param("userId") UUID userId
+    );
 }

@@ -24,26 +24,16 @@ public class OpinionValid {
 
     private final OpinionRepository opinionRepository;
 
-    public void validateOpinion(OpinionDAO opinionDAO, boolean isSameUser) {
+    public void validateOpinion(OpinionDAO opinionDAO, boolean isSameUser, boolean isupdate) {
         List<String> validationErrors = new ArrayList<>();
 
         if (opinionDAO.getOpinion() == null || opinionDAO.getOpinion().isEmpty()) {
             validationErrors.add("Opinia nie może być pusta");
         }
 
-        if (!isSameUser) {
-            UserDAO userDAO = opinionDAO.getUser();
-            if (userDAO == null) {
-                throw new IllegalArgumentException("UserDAO cannot be null in OpinionDAO");
-            }
+        if (!isSameUser && !isupdate) {
 
-            PlaceDAO placeDAO = opinionDAO.getPlace();
-            if (placeDAO == null) {
-                log.error("PlaceDAO is null in OpinionDAO: {}", opinionDAO);
-                throw new IllegalArgumentException("PlaceDAO cannot be null in OpinionDAO");
-            }
-
-            if (opinionRepository.findByUserAndPlace(userDAO, placeDAO).isPresent()) {
+            if (opinionRepository.findByUserAndPlace(opinionDAO.getUser(), opinionDAO.getPlace()).isPresent()) {
                 validationErrors.add("Opinia tego użytkownika już istnieje");
             }
 
@@ -60,19 +50,9 @@ public class OpinionValid {
         }
     }
 
+
     public boolean checkIfSameOpinion(OpinionDAO opinionDAO) {
-        PlaceDAO placeDAO = opinionDAO.getPlace();
-        if (placeDAO == null) {
-            log.error("PlaceDAO is null in OpinionDAO: {}", opinionDAO);
-            throw new IllegalArgumentException("PlaceDAO cannot be null in OpinionDAO");
-        }
-
-        UserDAO userDAO = opinionDAO.getUser();
-        if (userDAO == null) {
-            throw new IllegalArgumentException("UserDAO cannot be null in OpinionDAO");
-        }
-
-        Optional<OpinionDAO> existingOpinion = opinionRepository.findByUserAndPlace(userDAO, placeDAO);
+        Optional<OpinionDAO> existingOpinion = opinionRepository.findByUserAndPlace(opinionDAO.getUser(), opinionDAO.getPlace());
 
         return existingOpinion.isPresent() && existingOpinion.get().equals(opinionDAO);
     }

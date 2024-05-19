@@ -30,7 +30,7 @@ public class OpinionServiceTest {
     public void init()
     {
         opinionRepository = Mockito.mock(OpinionRepository.class);
-        opinionService = new OpinionService(opinionRepository,new OpinionValid(opinionRepository),new AIModelService());
+        opinionService = new OpinionService(opinionRepository, new AIModelService(),new OpinionValid(opinionRepository));
     }
 
     @Test
