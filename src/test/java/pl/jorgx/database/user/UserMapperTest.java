@@ -12,7 +12,7 @@ import pl.jorgx.database.configuration.MapperConfiguration;
 import pl.jorgx.database.user.factory.UserDAOFactory;
 import pl.jorgx.database.user.factory.UserDTOFactory;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = MapperConfiguration.class)
@@ -76,6 +76,7 @@ class UserMapperTest {
         softly.assertThat(userUpdateDTO.getUserType()).isEqualTo(userDAO.getUserType());
         softly.assertThat(userUpdateDTO.getEmail()).isEqualTo(userDAO.getEmail());
         softly.assertThat(userUpdateDTO.getName()).isEqualTo(userDAO.getName());
+        softly.assertThat(passwordEncoder.matches(userUpdateDTO.getPassword(), userDAO.getPassword())).isTrue();
         softly.assertAll();
     }
 }

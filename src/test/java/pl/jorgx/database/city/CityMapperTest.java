@@ -7,17 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import pl.jorgX.database.city.*;
-import pl.jorgX.database.opinion.OpinionCreateDTO;
-import pl.jorgX.database.opinion.OpinionDAO;
-import pl.jorgX.database.opinion.OpinionInfoDTO;
-import pl.jorgX.database.opinion.OpinionMapper;
 import pl.jorgx.database.city.factory.CityDAOFactory;
 import pl.jorgx.database.city.factory.CityDTOFactory;
 import pl.jorgx.database.configuration.MapperConfiguration;
-import pl.jorgx.database.opinion.factory.OpinionDAOFactory;
-import pl.jorgx.database.opinion.factory.OpinionDTOFactory;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = MapperConfiguration.class)
@@ -27,8 +21,7 @@ public class CityMapperTest {
     private CityMapper cityMapper;
 
     @Test
-    void cityDAOToCityInfoDto()
-    {
+    void cityDAOToCityInfoDto() {
         CityDAO cityDAO = CityDAOFactory.defaultBuilder().build();
 
         CityInfoDTO cityInfoDTO = cityMapper.cityDAOToCityInfoDto(cityDAO);
@@ -40,8 +33,7 @@ public class CityMapperTest {
     }
 
     @Test
-    void cityCreateDtoToCityDAO()
-    {
+    void cityCreateDtoToCityDAO() {
         CityCreateDTO cityCreateDTO = CityDTOFactory.defaultCityCreateDTO();
 
         CityDAO cityDAO = cityMapper.cityCreateDtoToCityDAO(cityCreateDTO);
@@ -52,8 +44,7 @@ public class CityMapperTest {
     }
 
     @Test
-    void cityUpdateDtoToCityDAO()
-    {
+    void cityUpdateDtoToCityDAO() {
         CityUpdateDTO cityUpdateDTO = CityDTOFactory.defaultCityUpdateDTO();
 
         CityDAO cityDAO = cityMapper.cityUpdateDtoToCityDAO(cityUpdateDTO);
@@ -62,5 +53,4 @@ public class CityMapperTest {
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(cityDAO.getName()).isEqualTo(cityUpdateDTO.getName());
     }
-
 }

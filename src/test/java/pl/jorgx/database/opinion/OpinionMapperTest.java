@@ -1,23 +1,17 @@
 package pl.jorgx.database.opinion;
 
 import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import pl.jorgX.database.opinion.*;
-import pl.jorgX.database.place.PlaceCreateDTO;
-import pl.jorgX.database.place.PlaceDAO;
-import pl.jorgX.database.place.PlaceInfoDTO;
 import pl.jorgx.database.configuration.MapperConfiguration;
 import pl.jorgx.database.opinion.factory.OpinionDAOFactory;
 import pl.jorgx.database.opinion.factory.OpinionDTOFactory;
-import pl.jorgx.database.place.factory.PlaceDAOFactory;
-import pl.jorgx.database.place.factory.PlaceDTOFactory;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = MapperConfiguration.class)
@@ -27,8 +21,7 @@ public class OpinionMapperTest {
     private OpinionMapper opinionMapper;
 
     @Test
-    void opinionDAOToOpinionInfoDto()
-    {
+    void opinionDAOToOpinionInfoDto() {
         OpinionDAO opinionDAO = OpinionDAOFactory.defaultBuilder().build();
 
         OpinionInfoDTO opinionInfoDTO = opinionMapper.opinionDAOToOpinionInfoDto(opinionDAO);
@@ -43,8 +36,7 @@ public class OpinionMapperTest {
     }
 
     @Test
-    void opinionCreateDtoToOpinionDAO()
-    {
+    void opinionCreateDtoToOpinionDAO() {
         OpinionCreateDTO opinionCreateDTO = OpinionDTOFactory.defaultOpinionCreateDTO();
 
         OpinionDAO opinionDAO = opinionMapper.opinionCreateDtoToOpinionDAO(opinionCreateDTO);
@@ -57,8 +49,7 @@ public class OpinionMapperTest {
     }
 
     @Test
-    void opinionUpdateDtoToOpinionDAO()
-    {
+    void opinionUpdateDtoToOpinionDAO() {
         OpinionUpdateDTO opinionUpdateDTO = OpinionDTOFactory.defaultOpinionUpdateDTO();
 
         OpinionDAO opinionDAO = opinionMapper.opinionUpdateDtoToOpinionDAO(opinionUpdateDTO);

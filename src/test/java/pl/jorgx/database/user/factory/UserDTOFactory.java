@@ -24,6 +24,7 @@ public class UserDTOFactory {
         userUpdateDTO.setUserType(UserDAOFactory.USER_TYPE);
         userUpdateDTO.setName(UserDAOFactory.NAME);
         userUpdateDTO.setEmail(UserDAOFactory.EMAIL);
+        userUpdateDTO.setPassword(PASSWORD);
 
         return userUpdateDTO;
     }

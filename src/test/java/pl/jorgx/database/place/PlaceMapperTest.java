@@ -11,7 +11,7 @@ import pl.jorgx.database.configuration.MapperConfiguration;
 import pl.jorgx.database.place.factory.PlaceDAOFactory;
 import pl.jorgx.database.place.factory.PlaceDTOFactory;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = MapperConfiguration.class)
@@ -21,8 +21,7 @@ public class PlaceMapperTest {
     private PlaceMapper placeMapper;
 
     @Test
-    void placeDAOToPlaceInfoDto()
-    {
+    void placeDAOToPlaceInfoDto() {
         PlaceDAO placeDAO = PlaceDAOFactory.defaultBuilder().build();
 
         PlaceInfoDTO placeInfoDTO = placeMapper.placeDAOToPlaceInfoDto(placeDAO);
@@ -38,8 +37,7 @@ public class PlaceMapperTest {
     }
 
     @Test
-    void placeCreateDtoToPlaceDAO()
-    {
+    void placeCreateDtoToPlaceDAO() {
         PlaceCreateDTO placeCreateDTO = PlaceDTOFactory.defaultPlaceCreateDTO();
 
         PlaceDAO placeDAO = placeMapper.placeCreateDtoToPlaceDAO(placeCreateDTO);
@@ -52,8 +50,7 @@ public class PlaceMapperTest {
     }
 
     @Test
-    void placeUpdateDtoToPlaceDAO()
-    {
+    void placeUpdateDtoToPlaceDAO() {
         PlaceUpdateDTO placeUpdateDTO = PlaceDTOFactory.defaultPlaceUpdateDTO();
 
         PlaceDAO placeDAO = placeMapper.placeUpdateDtoToPlaceDAO(placeUpdateDTO);
