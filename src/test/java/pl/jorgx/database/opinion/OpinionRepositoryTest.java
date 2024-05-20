@@ -7,14 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import pl.jorgX.database.opinion.OpinionDAO;
 import pl.jorgX.database.opinion.OpinionRepository;
-import pl.jorgX.database.place.PlaceDAO;
-import pl.jorgX.database.place.PlaceRepository;
 import pl.jorgx.database.opinion.factory.OpinionDAOFactory;
-import pl.jorgx.database.place.factory.PlaceDAOFactory;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -23,16 +20,13 @@ public class OpinionRepositoryTest {
     @Autowired
     private OpinionRepository opinionRepository;
 
-
     @BeforeEach
-    public void setUp()
-    {
+    public void setUp() {
         opinionRepository.deleteAll();
     }
 
     @Test
-    public void saveOpinion()
-    {
+    public void saveOpinion() {
         OpinionDAO opinionDAO = OpinionDAOFactory.defaultBuilder().build();
 
         OpinionDAO saved = opinionRepository.saveAndFlush(opinionDAO);
@@ -42,8 +36,7 @@ public class OpinionRepositoryTest {
     }
 
     @Test
-    public void update()
-    {
+    public void update() {
         OpinionDAO opinionDAO = OpinionDAOFactory.defaultBuilder().build();
         opinionDAO.setOpinion("Old");
 
@@ -57,8 +50,7 @@ public class OpinionRepositoryTest {
     }
 
     @Test
-    public void delete()
-    {
+    public void delete() {
         OpinionDAO opinionDAO = OpinionDAOFactory.defaultBuilder().build();
         opinionRepository.saveAndFlush(opinionDAO);
 
@@ -69,8 +61,7 @@ public class OpinionRepositoryTest {
     }
 
     @Test
-    public void findall()
-    {
+    public void findall() {
         OpinionDAO opinionDAO = OpinionDAOFactory.defaultBuilder().opinion("place1").build();
         OpinionDAO opinionDAO2 = OpinionDAOFactory.defaultBuilder().opinion("place2").build();
         opinionRepository.saveAndFlush(opinionDAO);

@@ -1,18 +1,18 @@
 package pl.jorgx.database.place;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import pl.jorgX.database.opinion.OpinionRepository;
 import pl.jorgX.database.place.PlaceDAO;
 import pl.jorgX.database.place.PlaceRepository;
 import pl.jorgx.database.place.factory.PlaceDAOFactory;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -21,16 +21,18 @@ public class PlaceRepositoryTest {
     @Autowired
     private PlaceRepository placeRepository;
 
+    @Autowired
+    private OpinionRepository opinionRepository;
+
 
     @BeforeEach
-    public void setUp()
-    {
+    public void setUp() {
         placeRepository.deleteAll();
+        opinionRepository.deleteAll();
     }
 
     @Test
-    public void savePlace()
-    {
+    public void savePlace() {
         PlaceDAO placeDAO = PlaceDAOFactory.defaultBuilder().build();
 
         PlaceDAO saved = placeRepository.saveAndFlush(placeDAO);
@@ -40,8 +42,7 @@ public class PlaceRepositoryTest {
     }
 
     @Test
-    public void update()
-    {
+    public void update() {
         PlaceDAO placeDAO = PlaceDAOFactory.defaultBuilder().build();
         placeDAO.setName("Old");
 
@@ -55,8 +56,7 @@ public class PlaceRepositoryTest {
     }
 
     @Test
-    public void delete()
-    {
+    public void delete() {
         PlaceDAO placeDAO = PlaceDAOFactory.defaultBuilder().build();
         placeRepository.saveAndFlush(placeDAO);
 
@@ -67,8 +67,7 @@ public class PlaceRepositoryTest {
     }
 
     @Test
-    public void findall()
-    {
+    public void findall() {
         PlaceDAO placeDAO = PlaceDAOFactory.defaultBuilder().name("place1").build();
         PlaceDAO placeDAO2 = PlaceDAOFactory.defaultBuilder().name("place2").build();
         placeRepository.saveAndFlush(placeDAO);

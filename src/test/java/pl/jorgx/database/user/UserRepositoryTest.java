@@ -1,11 +1,13 @@
 package pl.jorgx.database.user;
 
-
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+import pl.jorgX.database.city.CityRepository;
+import pl.jorgX.database.opinion.OpinionRepository;
+import pl.jorgX.database.place.PlaceRepository;
 import pl.jorgX.database.user.UserDAO;
 import pl.jorgX.database.user.UserRepository;
 import pl.jorgX.database.user.UserType;
@@ -14,7 +16,7 @@ import pl.jorgx.database.user.factory.UserDAOFactory;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -23,6 +25,22 @@ class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private OpinionRepository opinionRepository;
+
+    @Autowired
+    private PlaceRepository placeRepository;
+
+    @Autowired
+    private CityRepository cityRepository;
+
+    @BeforeEach
+    public void setUp() {
+        userRepository.deleteAll();
+        opinionRepository.deleteAll();
+        placeRepository.deleteAll();
+        cityRepository.deleteAll();
+    }
 
     @Test
     public void saveUserTest() {
@@ -80,7 +98,7 @@ class UserRepositoryTest {
         List<UserDAO> userDAOList = userRepository.findAll();
 
         // then
-        assertEquals(4, userDAOList.size());
+        assertEquals(2, userDAOList.size());
     }
 
     @Test
@@ -121,8 +139,8 @@ class UserRepositoryTest {
         List<UserDAO> userTypeAdministrator = userRepository.findByUserType(UserType.ADMINISTRATOR);
 
         // then
-        assertEquals(3, userTypeUser.size());
-        assertEquals(2, userTypeAdministrator.size());
+        assertEquals(2, userTypeUser.size());
+        assertEquals(1, userTypeAdministrator.size());
         assertTrue(userTypeUser.contains(user1));
         assertTrue(userTypeUser.contains(user2));
         assertTrue(userTypeAdministrator.contains(admin));
