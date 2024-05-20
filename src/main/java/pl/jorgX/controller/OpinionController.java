@@ -65,6 +65,11 @@ public class OpinionController {
         placeDAO.ifPresent(dao -> placeService.updateRatingForPlace(dao.getId()));
     }
 
+    @DeleteMapping("/place/{placeId}")
+    public void deleteOpinionsByPlaceId(@PathVariable UUID placeId) {
+        opinionService.deleteOpinionsByPlaceId(placeId);
+    }
+
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteOpinion(@PathVariable UUID id) {
         log.debug("Deleting opinion {}", id);

@@ -59,6 +59,10 @@ public class OpinionService {
         return log.traceExit(opinionRepository.save(toUpdate));
     }
 
+    public void deleteOpinionsByPlaceId(UUID placeId) {
+        opinionRepository.deleteAllWithPlaceId(placeId);
+    }
+
     public void delete(UUID id) {
         log.debug("Deleting opinion {}", id);
         opinionRepository.deleteById(id);
