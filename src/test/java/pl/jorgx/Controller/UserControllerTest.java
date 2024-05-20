@@ -10,8 +10,10 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import pl.jorgX.controller.UserController;
 import pl.jorgX.database.user.UserCreateDTO;
 import pl.jorgX.database.user.UserDAO;
+import pl.jorgX.database.user.UserRepository;
 import pl.jorgX.database.user.UserType;
 import pl.jorgX.services.CityService;
 import pl.jorgX.services.OpinionService;
@@ -21,7 +23,6 @@ import pl.jorgx.JsonUtility;
 import pl.jorgx.database.configuration.MapperConfiguration;
 import pl.jorgx.database.user.factory.UserDAOFactory;
 import pl.jorgx.database.user.factory.UserDTOFactory;
-
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,8 +41,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ContextConfiguration(classes = MapperConfiguration.class)
 @RunWith(SpringRunner.class)
-@WebMvcTest(UserControllerTest.class)
-@WithMockUser( username = "user", roles = "USER")
+@WebMvcTest(UserController.class)
+@WithMockUser(username = "user", roles = "USER")
 public class UserControllerTest {
 
     @Autowired
@@ -59,6 +60,9 @@ public class UserControllerTest {
     @MockBean
     private PlaceService placeService;
 
+    @MockBean
+    private UserRepository userRepository;
+
     @Test
     public void createUser_ok() throws Exception {
         UserDAO userDAO = UserDAOFactory.defaultBuilder().build();
@@ -66,46 +70,43 @@ public class UserControllerTest {
         given(userService.create(any())).willReturn(userDAO);
 
         mockMvc.perform(post("/dashboard/users").with(csrf())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtility.toJson(createDTO)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(JsonUtility.toJson(createDTO)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email", is(userDAO.getEmail())))
                 .andExpect(jsonPath("$.name", is(userDAO.getName())))
                 .andExpect(jsonPath("$.userType", is(userDAO.getUserType().toString())))
-                .andExpect(jsonPath("$.active",is(userDAO.getActive())));
+                .andExpect(jsonPath("$.active", is(userDAO.getActive())));
     }
 
     @Test
-    public void createUser_noValidInput() throws Exception
-    {
+    public void createUser_noValidInput() throws Exception {
         UserCreateDTO createDTO = UserDTOFactory.defaultUserCreateDTO();
         createDTO.setEmail(null);
 
         mockMvc.perform(post("/dashboard/users").with(csrf())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtility.toJson(createDTO)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(JsonUtility.toJson(createDTO)))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void getUserType() throws Exception
-    {
+    public void getUserType() throws Exception {
         List<UserType> userTypeList = Arrays.asList(UserType.values());
         when(userService.getAllUserTypes()).thenReturn(userTypeList);
 
         mockMvc.perform(get("/dashboard/users/userTypes").with(csrf()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$" , hasSize(userTypeList.size())))
+                .andExpect(jsonPath("$", hasSize(userTypeList.size())))
                 .andExpect(jsonPath("$[0]").value(UserType.USER.toString()))
                 .andExpect(jsonPath("$[1]").value(UserType.ADMINISTRATOR.toString()));
     }
 
     @Test
-    public void deleteuser() throws Exception
-    {
+    public void deleteUser() throws Exception {
         doNothing().when(userService).delete(any());
 
-        mockMvc.perform(delete("/dashboard/users" + UUID.randomUUID()).with(csrf()))
+        mockMvc.perform(delete("/dashboard/users/" + UUID.randomUUID()).with(csrf()))
                 .andExpect(status().isOk());
     }
 }
