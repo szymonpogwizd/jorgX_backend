@@ -2,6 +2,7 @@ package pl.jorgX.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.jorgX.database.city.CityRepository;
 import pl.jorgX.database.place.*;
@@ -43,6 +44,13 @@ public class PlaceController {
                 .map(placeMapper::placeDAOToPlaceInfoDto)
                 .collect(Collectors.toList()));
     }
+    @GetMapping("/checkPlaceExists")
+    public ResponseEntity<Boolean> checkPlaceExists(@RequestParam String street, @RequestParam String name) {
+        log.debug("Checking if place exists by street: {} and name: {}", street, name);
+        boolean exists = placeService.placeExists(street, name);
+        return ResponseEntity.ok(exists);
+    }
+
 
     @GetMapping("/{name}")
     public PlaceInfoDTO getPlaceByName(@PathVariable String name) {

@@ -16,7 +16,9 @@ public interface PlaceRepository extends JpaRepository<PlaceDAO, UUID> {
     List<PlaceDAO> findByCityId(UUID cityId);
     Optional<PlaceDAO> findByName(String name);
 
+    @Query("SELECT p FROM PlaceDAO p WHERE p.name = :name AND p.street = :street")
     Optional<PlaceDAO> findByNameAndStreet(String name, String street);
+
 
     @Query("SELECT o.place FROM OpinionDAO o WHERE o.id = :opinionId")
     Optional<PlaceDAO> findByOpinionId(@Param("opinionId") UUID opinionId);
