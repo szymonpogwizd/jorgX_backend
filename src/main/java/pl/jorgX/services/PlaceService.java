@@ -53,11 +53,16 @@ public class PlaceService {
         return log.traceExit(placeRepository.findByOpinionId(id));
     }
 
-    public Optional<PlaceDAO> findByNameAndStreet(String street, String name)
-    {
-        log.debug("Getting place by street: " + street + " and name: "+ name);
-        return log.traceExit(placeRepository.findByNameAndStreet(street,name));
+    public Optional<PlaceDAO> findByNameAndStreet(String street, String name) {
+        log.debug("Getting place by street: {} and name: {}", street, name);
+        return placeRepository.findByNameAndStreet(name, street);
     }
+
+    public boolean placeExists(String street, String name) {
+        log.debug("Checking if place exists by street: {} and name: {}", street, name);
+        return placeRepository.findByNameAndStreet(name, street).isPresent();
+    }
+
 
     @Transactional
     public PlaceDAO update(UUID id, PlaceDAO place) {
