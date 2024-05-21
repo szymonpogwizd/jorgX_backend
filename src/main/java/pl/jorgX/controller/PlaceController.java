@@ -80,13 +80,5 @@ public class PlaceController {
     public void deletePlace(@PathVariable UUID id) {
         log.debug("Deleting place {}", id);
         placeService.delete(id);
-
-
-    }
-
-    public class PlaceNotFoundException extends RuntimeException {
-        public PlaceNotFoundException(String message) {
-            super(message);
-        }
     }
 }
