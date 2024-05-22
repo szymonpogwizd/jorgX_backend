@@ -33,7 +33,7 @@ public class OpinionValid {
 
         if (!isSameUser && !isupdate) {
 
-            if (opinionRepository.findByUserAndPlace(opinionDAO.getUser(), opinionDAO.getPlace()).isPresent()) {
+            if (opinionRepository.findByUserIdAndPlaceId(opinionDAO.getUser().getId(), opinionDAO.getPlace().getId()).isPresent()) {
                 validationErrors.add("Opinia tego użytkownika już istnieje");
             }
 
@@ -52,7 +52,7 @@ public class OpinionValid {
 
 
     public boolean checkIfSameOpinion(OpinionDAO opinionDAO) {
-        Optional<OpinionDAO> existingOpinion = opinionRepository.findByUserAndPlace(opinionDAO.getUser(), opinionDAO.getPlace());
+        Optional<OpinionDAO> existingOpinion = opinionRepository.findByUserIdAndPlaceId(opinionDAO.getUser().getId(), opinionDAO.getPlace().getId());
 
         return existingOpinion.isPresent() && existingOpinion.get().equals(opinionDAO);
     }

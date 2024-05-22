@@ -18,7 +18,8 @@ public interface OpinionRepository extends JpaRepository<OpinionDAO, UUID> {
 
     List<OpinionDAO> findByPlaceId(UUID placeId);
 
-    Optional<OpinionDAO> findByUserAndPlace(UserDAO userDAO, PlaceDAO placeDAO);
+    Optional<OpinionDAO> findByUserIdAndPlaceId(UUID userId, UUID placeId);
+
 
     @Query("SELECT COUNT(o) FROM OpinionDAO o")
     int countOpinions();

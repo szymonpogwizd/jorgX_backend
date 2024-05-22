@@ -29,7 +29,7 @@ public class PlaceService {
     @Transactional
     public PlaceDAO createPlace(PlaceDAO opinion) {
         log.debug("Creating opinion: " + opinion);
-//        placeValidator.validatePlace(opinion,false);
+        placeValidator.validatePlace(opinion,false);
         return log.traceExit(placeRepository.save(opinion));
     }
 
@@ -69,7 +69,7 @@ public class PlaceService {
         log.debug("Editing place {} - {}", id, place);
         System.out.println("Id: " + place);
         boolean isSamePlace = placeValidator.checkIfSamePlace(id,place);
-//        placeValidator.validatePlace(place,isSamePlace);
+        placeValidator.validatePlace(place,isSamePlace);
         PlaceDAO toUpdate = placeRepository.findById(id)
                 .orElseThrow(() -> new ValidationException("Place with id " + id + " was not found"));
         toUpdate.setName(place.getName());

@@ -9,6 +9,7 @@ import pl.jorgX.database.opinion.*;
 import pl.jorgX.database.place.PlaceDAO;
 import pl.jorgX.database.place.PlaceRepository;
 import pl.jorgX.database.user.UserRepository;
+import pl.jorgX.database.user.UserType;
 import pl.jorgX.services.OpinionService;
 import pl.jorgX.services.PlaceService;
 
@@ -30,6 +31,8 @@ public class OpinionController {
     private final OpinionMapper opinionMapper;
     private final PlaceRepository placeRepository;
     private final UserRepository userRepository;
+
+
 
     @PostMapping
     public OpinionInfoDTO createOpinion(@RequestBody @Valid OpinionCreateDTO opinion) {
@@ -63,6 +66,24 @@ public class OpinionController {
     private void updatePlaceRatingForOpinion(UUID opinionId) {
         Optional<PlaceDAO> placeDAO = placeService.getPlaceByOpinionId(opinionId);
         placeDAO.ifPresent(dao -> placeService.updateRatingForPlace(dao.getId()));
+    }
+
+    @GetMapping("/{placeID}")
+    public ResponseEntity<List<OpinionInfoDTO>> getOpinionByPlace(@PathVariable String placeID, @RequestParam String userID) {
+        log.debug("Received placeID: {} and userID: {}", placeID, userID);
+        try {
+            UUID placeUUID = UUID.fromString(placeID);
+            UUID userUUID = UUID.fromString(userID);
+            log.debug("Converted placeID: {} and userID: {} to UUIDs", placeUUID, userUUID);
+            List<OpinionInfoDTO> opinions = opinionService.findByUserAndPlace(userUUID, placeUUID)
+                    .stream()
+                    .map(opinionMapper::opinionDAOToOpinionInfoDto)
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(opinions);
+        } catch (IllegalArgumentException e) {
+            log.error("Invalid UUID string: placeID={}, userID={}", placeID, userID, e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
     }
 
     @DeleteMapping("/place/{placeId}")

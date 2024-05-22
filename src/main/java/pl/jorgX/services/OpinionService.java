@@ -27,7 +27,7 @@ public class OpinionService {
     @Transactional
     public OpinionDAO createOpinion(OpinionDAO opinion) {
         log.debug("Creating opinion: " + opinion);
-//        opinionValid.validateOpinion(opinion,false,false);
+        opinionValid.validateOpinion(opinion,false,false);
         opinion.setOpinionType(aiModelService.getOpinionType(opinion.getOpinion()));
         return log.traceExit(opinionRepository.save(opinion));
     }
@@ -38,10 +38,9 @@ public class OpinionService {
         return log.traceExit(opinionRepository.findByPlaceId(id));
     }
 
-    public Optional<OpinionDAO> findByUserAndPlace(UserDAO userID, PlaceDAO placeID)
-    {
-        log.debug("Getting opinion by user: " + userID + " and place: "+ placeID);
-        return log.traceExit(opinionRepository.findByUserAndPlace(userID, placeID));
+    public Optional<OpinionDAO> findByUserAndPlace(UUID userID, UUID placeID) {
+        log.debug("Getting opinion by user: {} and place: {}", userID, placeID);
+        return log.traceExit(opinionRepository.findByUserIdAndPlaceId(userID, placeID));
     }
 
     @Transactional
@@ -50,8 +49,8 @@ public class OpinionService {
 
         System.out.println("Id: " + opinion);
 
-//        boolean isSameOpinion = opinionValid.checkIfSameOpinion(opinion);
-//        opinionValid.validateOpinion(opinion,isSameOpinion,true);
+       boolean isSameOpinion = opinionValid.checkIfSameOpinion(opinion);
+       opinionValid.validateOpinion(opinion,isSameOpinion,true);
         OpinionDAO toUpdate = opinionRepository.findById(id)
                .orElseThrow(() -> new ValidationException("Opinion with id " + id + " was not found"));
         toUpdate.setOpinion(opinion.getOpinion());
