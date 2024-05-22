@@ -31,28 +31,28 @@ public class OpinionValid {
             validationErrors.add("Opinia nie może być pusta");
         }
 
-        if (!isSameUser && !isupdate) {
-
-            if (opinionRepository.findByUserAndPlace(opinionDAO.getUser(), opinionDAO.getPlace()).isPresent()) {
-                validationErrors.add("Opinia tego użytkownika już istnieje");
-            }
-
-            try {
-                OpinionValidator.validate(opinionDAO.getOpinion());
-            } catch (OpinionValidatorException e) {
-                validationErrors.add(e.getMessage());
-            }
-
-            if (!validationErrors.isEmpty()) {
-                String error = String.join("", validationErrors);
-                throw new ValidationException(error);
-            }
-        }
+//        if (!isSameUser && !isupdate) {
+//
+//            if (opinionRepository.findByUserIdAndPlaceId(opinionDAO.getUser().getId(), opinionDAO.getPlace().getId()).isPresent()) {
+//                validationErrors.add("Opinia tego użytkownika już istnieje");
+//            }
+//
+//            try {
+//                OpinionValidator.validate(opinionDAO.getOpinion());
+//            } catch (OpinionValidatorException e) {
+//                validationErrors.add(e.getMessage());
+//            }
+//
+//            if (!validationErrors.isEmpty()) {
+//                String error = String.join("", validationErrors);
+//                throw new ValidationException(error);
+//            }
+//        }
     }
 
 
     public boolean checkIfSameOpinion(OpinionDAO opinionDAO) {
-        Optional<OpinionDAO> existingOpinion = opinionRepository.findByUserAndPlace(opinionDAO.getUser(), opinionDAO.getPlace());
+        Optional<OpinionDAO> existingOpinion = opinionRepository.findByUserIdAndPlaceId(opinionDAO.getUser().getId(), opinionDAO.getPlace().getId());
 
         return existingOpinion.isPresent() && existingOpinion.get().equals(opinionDAO);
     }

@@ -38,8 +38,8 @@ public class OpinionValidator implements ConstraintValidator<Opinion, String> {
             throw new OpinionValidatorException("Opinia po usunięciu niedozwolonych znaków jest pusta.");
         }
 
-        if (cleanedOpinion.length() > 250) {
-            throw new OpinionValidatorException("Opinia jest dłuższa niż 250 znaków.");
+        if (cleanedOpinion.length() > 500) {
+            throw new OpinionValidatorException("Opinia jest dłuższa niż 500 znaków.");
         }
     }
 }
