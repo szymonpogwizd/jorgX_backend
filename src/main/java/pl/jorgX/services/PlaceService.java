@@ -78,6 +78,18 @@ public class PlaceService {
         return log.traceExit(placeRepository.save(toUpdate));
     }
 
+    @Transactional
+    public PlaceDAO upPlace(UUID id, PlaceDAO place) {
+        log.debug("Editing place {} - {}", id, place);
+        System.out.println("Id: " + place);
+        PlaceDAO toUpdate = placeRepository.findById(id)
+                .orElseThrow(() -> new ValidationException("Place with id " + id + " was not found"));
+        toUpdate.setName(place.getName());
+        toUpdate.setOpeningHours(place.getOpeningHours());
+        toUpdate.setStreet(place.getStreet());
+        return log.traceExit(placeRepository.save(toUpdate));
+    }
+
     public void delete(UUID id) {
         log.debug("Deleting place {}", id);
         placeRepository.deleteById(id);
