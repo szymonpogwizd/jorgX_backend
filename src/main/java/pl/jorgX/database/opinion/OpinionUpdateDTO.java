@@ -10,7 +10,7 @@ import java.util.UUID;
 public class OpinionUpdateDTO {
 
     @NotBlank
-    @Size(min = 1, max = 250)
+    @Size(min = 1, max = 500)
     private String opinion;
     private UUID placeId;
     private UUID userId;
