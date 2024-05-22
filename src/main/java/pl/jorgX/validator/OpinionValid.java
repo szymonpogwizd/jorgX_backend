@@ -31,23 +31,23 @@ public class OpinionValid {
             validationErrors.add("Opinia nie może być pusta");
         }
 
-        if (!isSameUser && !isupdate) {
-
-            if (opinionRepository.findByUserIdAndPlaceId(opinionDAO.getUser().getId(), opinionDAO.getPlace().getId()).isPresent()) {
-                validationErrors.add("Opinia tego użytkownika już istnieje");
-            }
-
-            try {
-                OpinionValidator.validate(opinionDAO.getOpinion());
-            } catch (OpinionValidatorException e) {
-                validationErrors.add(e.getMessage());
-            }
-
-            if (!validationErrors.isEmpty()) {
-                String error = String.join("", validationErrors);
-                throw new ValidationException(error);
-            }
-        }
+//        if (!isSameUser && !isupdate) {
+//
+//            if (opinionRepository.findByUserIdAndPlaceId(opinionDAO.getUser().getId(), opinionDAO.getPlace().getId()).isPresent()) {
+//                validationErrors.add("Opinia tego użytkownika już istnieje");
+//            }
+//
+//            try {
+//                OpinionValidator.validate(opinionDAO.getOpinion());
+//            } catch (OpinionValidatorException e) {
+//                validationErrors.add(e.getMessage());
+//            }
+//
+//            if (!validationErrors.isEmpty()) {
+//                String error = String.join("", validationErrors);
+//                throw new ValidationException(error);
+//            }
+//        }
     }
 
 
