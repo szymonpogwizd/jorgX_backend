@@ -76,6 +76,13 @@ public class PlaceController {
         return log.traceExit(placeMapper.placeDAOToPlaceInfoDto(updatedPlace));
     }
 
+    @PutMapping("/up/{id}")
+    public PlaceInfoDTO upPlace(@RequestBody @Valid PlaceUpdateDTO place, @PathVariable UUID id) {
+        log.debug("Update place {}: {}", id, place);
+        PlaceDAO updatedPlace = placeService.upPlace(id, placeMapper.placeUpdateDtoToPlaceDAO(place));
+        return log.traceExit(placeMapper.placeDAOToPlaceInfoDto(updatedPlace));
+    }
+
     @DeleteMapping("{id}")
     public void deletePlace(@PathVariable UUID id) {
         log.debug("Deleting place {}", id);
