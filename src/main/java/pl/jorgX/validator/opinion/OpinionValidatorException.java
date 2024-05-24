@@ -4,10 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.EXPECTATION_FAILED, reason = "Opinion validation failed")
-public class OpinionValidatorException  extends  RuntimeException {
+public class OpinionValidatorException extends RuntimeException {
 
-    OpinionValidatorException(String message)
-    {
+    OpinionValidatorException(String message) {
         super(message);
     }
 }

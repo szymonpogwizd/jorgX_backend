@@ -86,7 +86,7 @@ public class CityControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(JsonUtility.toJson(cityCreateDTO)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name" , is(cityDAO.getName())));
+                .andExpect(jsonPath("$.name", is(cityDAO.getName())));
     }
 
     @Test

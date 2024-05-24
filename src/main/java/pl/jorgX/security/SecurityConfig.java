@@ -17,6 +17,7 @@ import pl.jorgX.utils.jwt.JwtLoginFilter;
 import pl.jorgX.utils.jwt.JwtUtils;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -64,7 +65,7 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
-        return new ProviderManager(Arrays.asList(authenticationProvider()));
+        return new ProviderManager(Collections.singletonList(authenticationProvider()));
     }
 
     @Bean

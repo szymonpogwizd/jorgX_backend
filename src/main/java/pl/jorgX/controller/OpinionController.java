@@ -9,7 +9,6 @@ import pl.jorgX.database.opinion.*;
 import pl.jorgX.database.place.PlaceDAO;
 import pl.jorgX.database.place.PlaceRepository;
 import pl.jorgX.database.user.UserRepository;
-import pl.jorgX.database.user.UserType;
 import pl.jorgX.services.OpinionService;
 import pl.jorgX.services.PlaceService;
 
@@ -31,7 +30,6 @@ public class OpinionController {
     private final OpinionMapper opinionMapper;
     private final PlaceRepository placeRepository;
     private final UserRepository userRepository;
-
 
 
     @PostMapping

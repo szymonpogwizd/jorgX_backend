@@ -46,7 +46,7 @@ public class OpinionRepositoryTest {
 
         assertNotNull(saved);
         assertEquals(opinionDAO.getId(), saved.getId());
-        assertEquals("New",saved.getOpinion());
+        assertEquals("New", saved.getOpinion());
     }
 
     @Test
@@ -69,6 +69,6 @@ public class OpinionRepositoryTest {
 
         List<OpinionDAO> all = opinionRepository.findAll();
 
-        assertEquals(2,all.size());
+        assertEquals(2, all.size());
     }
 }

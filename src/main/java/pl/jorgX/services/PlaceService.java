@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.jorgX.database.city.CityDAO;
 import pl.jorgX.database.opinion.OpinionDAO;
 import pl.jorgX.database.opinion.OpinionType;
 import pl.jorgX.database.place.PlaceDAO;

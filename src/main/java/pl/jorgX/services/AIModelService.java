@@ -20,7 +20,7 @@ public class AIModelService {
     public OpinionType getOpinionType(String opinion) {
         log.debug("Getting opinion type for opinion: {}", opinion);
         try {
-            opinion = encodeJsonString (opinion);
+            opinion = encodeJsonString(opinion);
             String response = modelClient.makeRequest(opinion);
             double[] predictions = parsePredictions(response);
             return determineOpinionType(predictions);

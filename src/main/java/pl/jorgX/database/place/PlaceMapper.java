@@ -11,6 +11,8 @@ import pl.jorgX.database.city.CityMapper;
 public interface PlaceMapper {
 
     PlaceInfoDTO placeDAOToPlaceInfoDto(PlaceDAO placeDAO);
+
     PlaceDAO placeCreateDtoToPlaceDAO(PlaceCreateDTO placeCreateDTO);
+
     PlaceDAO placeUpdateDtoToPlaceDAO(PlaceUpdateDTO placeUpdateDTO);
 }

@@ -7,8 +7,7 @@ import java.util.UUID;
 
 public class PlaceDTOFactory {
 
-    public static PlaceCreateDTO defaultPlaceCreateDTO()
-    {
+    public static PlaceCreateDTO defaultPlaceCreateDTO() {
         PlaceCreateDTO placeCreateDTO = new PlaceCreateDTO();
         placeCreateDTO.setName(PlaceDAOFactory.NAME);
         placeCreateDTO.setStreet(PlaceDAOFactory.STREET);
@@ -18,8 +17,7 @@ public class PlaceDTOFactory {
         return placeCreateDTO;
     }
 
-    public static PlaceUpdateDTO defaultPlaceUpdateDTO()
-    {
+    public static PlaceUpdateDTO defaultPlaceUpdateDTO() {
         PlaceUpdateDTO placeUpdateDTO = new PlaceUpdateDTO();
         placeUpdateDTO.setCityId(PlaceDAOFactory.ID);
         placeUpdateDTO.setName(PlaceDAOFactory.NAME);

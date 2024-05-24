@@ -22,15 +22,13 @@ public class CityServiceTest {
     private CityRepository cityRepository;
 
     @BeforeEach
-    public void init()
-    {
+    public void init() {
         cityRepository = Mockito.mock(CityRepository.class);
-        cityService = new CityService(cityRepository,null,new CityValidator(cityRepository));
+        cityService = new CityService(cityRepository, null, new CityValidator(cityRepository));
     }
 
     @Test
-    void create()
-    {
+    void create() {
         CityDAO cityDAO = CityDAOFactory.defaultBuilder().build();
 
         cityService.createCity(cityDAO);
@@ -40,8 +38,7 @@ public class CityServiceTest {
     }
 
     @Test
-    void delete()
-    {
+    void delete() {
         UUID uuid = UUID.randomUUID();
 
         cityService.delete(uuid);
@@ -50,8 +47,7 @@ public class CityServiceTest {
     }
 
     @Test
-    void getall()
-    {
+    void getall() {
         List<CityDAO> cityDAOList = List.of(
                 CityDAOFactory.defaultBuilder().build(),
                 CityDAOFactory.defaultBuilder().build(),

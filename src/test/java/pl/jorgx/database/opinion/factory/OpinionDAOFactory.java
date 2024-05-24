@@ -15,15 +15,13 @@ public class OpinionDAOFactory {
     public static final OpinionType opinionType = NEGATIVE;
     public static final UUID PLACE = UUID.randomUUID();
 
-    public static OpinionDAO.OpinionDAOBuilder defaultBuilder()
-    {
-        return  OpinionDAO.builder()
+    public static OpinionDAO.OpinionDAOBuilder defaultBuilder() {
+        return OpinionDAO.builder()
                 .opinion(OPINION)
                 .opinionType(opinionType);
     }
 
-    public static List<OpinionDAO> defaultList()
-    {
+    public static List<OpinionDAO> defaultList() {
         return List.of(
                 defaultBuilder().build(),
                 defaultBuilder().build()

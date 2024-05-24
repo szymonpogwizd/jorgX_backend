@@ -21,10 +21,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserService {
 
-    @Value("${app.user.token.activation.validity-days:7}")
-    private int tokenValidity;
     private final UserRepository userRepository;
     private final UserValidator userValidator;
+    @Value("${app.user.token.activation.validity-days:7}")
+    private int tokenValidity;
 
     @Transactional
     public UserDAO create(UserDAO user) {

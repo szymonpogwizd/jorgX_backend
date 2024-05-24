@@ -6,8 +6,7 @@ import pl.jorgx.database.place.factory.PlaceDAOFactory;
 
 public class OpinionDTOFactory {
 
-    public static OpinionCreateDTO defaultOpinionCreateDTO()
-    {
+    public static OpinionCreateDTO defaultOpinionCreateDTO() {
         OpinionCreateDTO opinionCreateDTO = new OpinionCreateDTO();
         opinionCreateDTO.setEmail("test@example.com");
         opinionCreateDTO.setOpinion(OpinionDAOFactory.OPINION);
@@ -17,8 +16,7 @@ public class OpinionDTOFactory {
     }
 
 
-    public static OpinionUpdateDTO defaultOpinionUpdateDTO()
-    {
+    public static OpinionUpdateDTO defaultOpinionUpdateDTO() {
         OpinionUpdateDTO opinionUpdateDTO = new OpinionUpdateDTO();
         opinionUpdateDTO.setUserId(null);
         opinionUpdateDTO.setOpinion(OpinionDAOFactory.OPINION);
