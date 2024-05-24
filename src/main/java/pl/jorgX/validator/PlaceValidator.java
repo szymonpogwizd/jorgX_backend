@@ -11,15 +11,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-
 @Component
 @RequiredArgsConstructor
 public class PlaceValidator {
 
     private final PlaceRepository placeRepository;
 
-    public boolean checkIfSamePlace(UUID id, PlaceDAO placeDAO)
-    {
+    public boolean checkIfSamePlace(UUID id, PlaceDAO placeDAO) {
         Optional<PlaceDAO> optionalPlaceDAO1 = placeRepository.findByName(placeDAO.getStreet());
         Optional<PlaceDAO> placeDAO1 = placeRepository.findByName(placeDAO.getName());
         boolean isSamePlaceByStreet = optionalPlaceDAO1.isPresent() && optionalPlaceDAO1.get().getId().equals(id);
@@ -27,17 +25,14 @@ public class PlaceValidator {
         return isSamePlaceByStreet && isSamePlaceByName;
     }
 
-    public void validatePlace( PlaceDAO placeDAO, boolean isSamePlace)
-    {
+    public void validatePlace(PlaceDAO placeDAO, boolean isSamePlace) {
         List<String> validationErrors = new ArrayList<>();
 
-        if(placeDAO.getName() == null || placeDAO.getName().isEmpty())
-        {
+        if (placeDAO.getName() == null || placeDAO.getName().isEmpty()) {
             validationErrors.add("Nazwa miejsca nie może być pusta\n");
         }
 
-        if(!isSamePlace)
-        {
+        if (!isSamePlace) {
 
             if (placeRepository.findByNameAndStreet(placeDAO.getName(),placeDAO.getStreet()).isPresent())
             {

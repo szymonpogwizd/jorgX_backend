@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.jorgX.database.opinion.OpinionDAO;
 import pl.jorgX.database.opinion.OpinionRepository;
-import pl.jorgX.database.place.PlaceDAO;
-import pl.jorgX.database.user.UserDAO;
 import pl.jorgX.validator.OpinionValid;
 
 import javax.validation.ValidationException;
@@ -27,7 +25,7 @@ public class OpinionService {
     @Transactional
     public OpinionDAO createOpinion(OpinionDAO opinion) {
         log.debug("Creating opinion: " + opinion);
-        opinionValid.validateOpinion(opinion,false,false);
+//        opinionValid.validateOpinion(opinion,false,false);
         opinion.setOpinionType(aiModelService.getOpinionType(opinion.getOpinion()));
         return log.traceExit(opinionRepository.save(opinion));
     }
@@ -49,10 +47,10 @@ public class OpinionService {
 
         System.out.println("Id: " + opinion);
 
-       boolean isSameOpinion = opinionValid.checkIfSameOpinion(opinion);
-       opinionValid.validateOpinion(opinion,isSameOpinion,true);
+//        boolean isSameOpinion = opinionValid.checkIfSameOpinion(opinion);
+//        opinionValid.validateOpinion(opinion, isSameOpinion, true);
         OpinionDAO toUpdate = opinionRepository.findById(id)
-               .orElseThrow(() -> new ValidationException("Opinion with id " + id + " was not found"));
+                .orElseThrow(() -> new ValidationException("Opinion with id " + id + " was not found"));
         toUpdate.setOpinion(opinion.getOpinion());
         toUpdate.setOpinionType(aiModelService.getOpinionType(opinion.getOpinion()));
         return log.traceExit(opinionRepository.save(toUpdate));

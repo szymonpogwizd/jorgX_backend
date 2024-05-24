@@ -27,7 +27,7 @@ public class CityService {
     @Transactional
     public CityDAO createCity(CityDAO city) {
         log.debug("Creating city: " + city);
-        cityValidator.ValidateCity(city,false);
+//        cityValidator.ValidateCity(city,false);
         return log.traceExit(cityRepository.save(city));
     }
 
@@ -44,8 +44,8 @@ public class CityService {
     @Transactional
     public CityDAO update(UUID id, CityDAO city) {
         log.debug("Editing city {} - {}", id, city);
-        boolean isSameCity = cityValidator.checkSameCity(id,city);
-        cityValidator.ValidateCity(city,isSameCity);
+//        boolean isSameCity = cityValidator.checkSameCity(id,city);
+//        cityValidator.ValidateCity(city,isSameCity);
         CityDAO toUpdate = cityRepository.findById(id)
                 .orElseThrow(() -> new ValidationException("City with id " + id + " was not found"));
 
