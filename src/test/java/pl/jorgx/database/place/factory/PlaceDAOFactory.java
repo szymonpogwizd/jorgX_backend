@@ -14,17 +14,15 @@ public class PlaceDAOFactory {
     public static final Double RATING = 4.5;
     public static final UUID ID = UUID.randomUUID();
 
-    public static PlaceDAO.PlaceDAOBuilder defaultBuilder()
-    {
-        return  PlaceDAO.builder()
+    public static PlaceDAO.PlaceDAOBuilder defaultBuilder() {
+        return PlaceDAO.builder()
                 .name(NAME)
                 .street(STREET)
                 .openingHours(OPENING_HOURS)
                 .rating(RATING);
     }
 
-    public static List<PlaceDAO> defaultList()
-    {
+    public static List<PlaceDAO> defaultList() {
         return List.of(
                 defaultBuilder().name("Test1").build(),
                 defaultBuilder().name("Test2").build()

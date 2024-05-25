@@ -8,16 +8,14 @@ import pl.jorgx.database.opinion.factory.OpinionDAOFactory;
 
 public class CityDTOFactory {
 
-    public static CityCreateDTO defaultCityCreateDTO()
-    {
+    public static CityCreateDTO defaultCityCreateDTO() {
         CityCreateDTO cityCreateDTO = new CityCreateDTO();
         cityCreateDTO.setName(CityDAOFactory.NAME);
         return cityCreateDTO;
     }
 
 
-    public static CityUpdateDTO defaultCityUpdateDTO()
-    {
+    public static CityUpdateDTO defaultCityUpdateDTO() {
         CityUpdateDTO cityUpdateDTO = new CityUpdateDTO();
         cityUpdateDTO.setName(CityDAOFactory.NAME);
         return cityUpdateDTO;

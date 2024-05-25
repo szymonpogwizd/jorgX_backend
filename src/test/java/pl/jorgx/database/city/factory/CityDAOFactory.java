@@ -13,14 +13,12 @@ public class CityDAOFactory {
 
     public static final String NAME = "test";
 
-    public static CityDAO.CityDAOBuilder defaultBuilder()
-    {
-        return  CityDAO.builder()
+    public static CityDAO.CityDAOBuilder defaultBuilder() {
+        return CityDAO.builder()
                 .name(NAME);
     }
 
-    public static List<CityDAO> defaultList()
-    {
+    public static List<CityDAO> defaultList() {
         return List.of(
                 defaultBuilder().build(),
                 defaultBuilder().build()

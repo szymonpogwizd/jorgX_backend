@@ -82,10 +82,10 @@ public class PlaceControllerTest {
         given(placeService.createPlace(any())).willReturn(placeDAO);
 
         mockMvc.perform(post("/dashboard/place").with(csrf())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtility.toJson(placeCreateDTO)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(JsonUtility.toJson(placeCreateDTO)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name" , is(placeDAO.getName())))
+                .andExpect(jsonPath("$.name", is(placeDAO.getName())))
                 .andExpect(jsonPath("$.street", is(placeDAO.getStreet())))
                 .andExpect(jsonPath("$.openingHours", is(placeDAO.getOpeningHours())))
                 .andExpect(jsonPath("$.rating", is(placeDAO.getRating())));

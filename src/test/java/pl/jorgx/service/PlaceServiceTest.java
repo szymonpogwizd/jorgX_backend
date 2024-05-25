@@ -23,15 +23,13 @@ public class PlaceServiceTest {
     private PlaceRepository placeRepository;
 
     @BeforeEach
-    public void init()
-    {
+    public void init() {
         placeRepository = Mockito.mock(PlaceRepository.class);
-        placeService = new PlaceService(placeRepository,null,new PlaceValidator(placeRepository));
+        placeService = new PlaceService(placeRepository, null, new PlaceValidator(placeRepository));
     }
 
     @Test
-    void createnewPlace()
-    {
+    void createnewPlace() {
         PlaceDAO placeDAO = buildCreatePlaceDAO();
 
         placeService.createPlace(placeDAO);
@@ -41,8 +39,7 @@ public class PlaceServiceTest {
     }
 
     @Test
-    void delete()
-    {
+    void delete() {
         UUID id = UUID.randomUUID();
 
         placeService.delete(id);
@@ -51,8 +48,7 @@ public class PlaceServiceTest {
     }
 
     @Test
-    void getAll()
-    {
+    void getAll() {
         List<PlaceDAO> placeDAOS = List.of(
                 PlaceDAOFactory.defaultBuilder().build(),
                 PlaceDAOFactory.defaultBuilder().build(),
@@ -67,8 +63,7 @@ public class PlaceServiceTest {
         assertEquals(3, placeDAOList.size());
     }
 
-    private PlaceDAO buildCreatePlaceDAO()
-    {
+    private PlaceDAO buildCreatePlaceDAO() {
         return PlaceDAOFactory.defaultBuilder().build();
     }
 }

@@ -28,26 +28,22 @@ public class MapperConfiguration {
     }
 
     @Bean
-    public UserMapper userMapper()
-    {
+    public UserMapper userMapper() {
         return new UserMapperImpl();
     }
 
     @Bean
-    public PlaceMapper placeMapper()
-    {
+    public PlaceMapper placeMapper() {
         return new PlaceMapperImpl();
     }
 
     @Bean
-    public OpinionMapper opinionMapper()
-    {
+    public OpinionMapper opinionMapper() {
         return new OpinionMapperImpl();
     }
 
     @Bean
-    public CityMapper cityMapper()
-    {
+    public CityMapper cityMapper() {
         return new CityMapperImpl();
     }
 

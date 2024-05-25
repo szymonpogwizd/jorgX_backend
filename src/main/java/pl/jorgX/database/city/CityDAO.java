@@ -26,7 +26,7 @@ public class CityDAO {
     public CityDAO() {
     }
 
-    public CityDAO(UUID id, String name){
+    public CityDAO(UUID id, String name) {
         this.id = id;
         this.name = name;
     }

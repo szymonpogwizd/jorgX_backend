@@ -14,6 +14,7 @@ import java.util.UUID;
 public interface PlaceRepository extends JpaRepository<PlaceDAO, UUID> {
 
     List<PlaceDAO> findByCityId(UUID cityId);
+
     Optional<PlaceDAO> findByName(String name);
 
     @Query("SELECT p FROM PlaceDAO p WHERE p.name = :name AND p.street = :street")

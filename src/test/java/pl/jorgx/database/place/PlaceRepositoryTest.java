@@ -52,7 +52,7 @@ public class PlaceRepositoryTest {
 
         assertNotNull(saved);
         assertEquals(placeDAO.getId(), saved.getId());
-        assertEquals("New",saved.getName());
+        assertEquals("New", saved.getName());
     }
 
     @Test
@@ -75,6 +75,6 @@ public class PlaceRepositoryTest {
 
         List<PlaceDAO> all = placeRepository.findAll();
 
-        assertEquals(2,all.size());
+        assertEquals(2, all.size());
     }
 }

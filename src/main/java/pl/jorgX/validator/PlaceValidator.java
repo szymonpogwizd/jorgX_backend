@@ -34,14 +34,12 @@ public class PlaceValidator {
 
         if (!isSamePlace) {
 
-            if (placeRepository.findByNameAndStreet(placeDAO.getName(),placeDAO.getStreet()).isPresent())
-            {
+            if (placeRepository.findByNameAndStreet(placeDAO.getName(), placeDAO.getStreet()).isPresent()) {
                 validationErrors.add("Miejsce o tym samym adresie i nazwie już istnieje\n");
             }
         }
 
-        if (!validationErrors.isEmpty())
-        {
+        if (!validationErrors.isEmpty()) {
             String errorMessage = String.join("", validationErrors);
             throw new ValidationException(errorMessage);
         }

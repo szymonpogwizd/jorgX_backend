@@ -9,6 +9,8 @@ import org.mapstruct.Mapper;
 public interface CityMapper {
 
     CityInfoDTO cityDAOToCityInfoDto(CityDAO cityDAO);
+
     CityDAO cityCreateDtoToCityDAO(CityCreateDTO cityCreateDTO);
+
     CityDAO cityUpdateDtoToCityDAO(CityUpdateDTO cityUpdateDTO);
 }

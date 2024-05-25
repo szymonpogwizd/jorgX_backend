@@ -27,15 +27,13 @@ public class OpinionServiceTest {
     private OpinionRepository opinionRepository;
 
     @BeforeEach
-    public void init()
-    {
+    public void init() {
         opinionRepository = Mockito.mock(OpinionRepository.class);
-        opinionService = new OpinionService(opinionRepository, new AIModelService(),new OpinionValid(opinionRepository));
+        opinionService = new OpinionService(opinionRepository, new AIModelService(), new OpinionValid(opinionRepository));
     }
 
     @Test
-    void create()
-    {
+    void create() {
         UserDAO userDAO = UserDAOFactory.defaultBuilder().build();
         userDAO.setId(UUID.randomUUID());
         PlaceDAO placeDAO = PlaceDAOFactory.defaultBuilder().build();
@@ -52,8 +50,7 @@ public class OpinionServiceTest {
     }
 
     @Test
-    void delete()
-    {
+    void delete() {
         UUID id = UUID.randomUUID();
 
         opinionService.delete(id);

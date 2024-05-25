@@ -12,6 +12,8 @@ import pl.jorgX.database.user.UserMapper;
 public interface OpinionMapper {
 
     OpinionInfoDTO opinionDAOToOpinionInfoDto(OpinionDAO opinionDAO);
+
     OpinionDAO opinionCreateDtoToOpinionDAO(OpinionCreateDTO opinionCreateDTO);
+
     OpinionDAO opinionUpdateDtoToOpinionDAO(OpinionUpdateDTO opinionUpdateDTO);
 }
